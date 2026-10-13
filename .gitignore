@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+*.pyc
+.cache/
+.DS_Store
+vault/.obsidian/workspace*.json
+vault/.obsidian/cache/
+vault/.trash/
+.env
+.env.*
+!.env.example
+

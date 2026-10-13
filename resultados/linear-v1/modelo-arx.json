@@ -1,0 +1,20 @@
+{
+  "name": "ARX(2,2)",
+  "output_order": 2,
+  "input_order": 2,
+  "coefficients": [
+    1.9703062577082497,
+    -0.9801986733067554,
+    0.001240675136578836,
+    0.001232428763047414,
+    -1.930492573664569e-16
+  ],
+  "parameters": 5,
+  "feature_order": "y[t], y[t-1], ...; u[t], u[t-1], ...; intercepto",
+  "diagnostics": {
+    "rank": 5,
+    "columns": 5,
+    "condition_number": 54.69915959593849,
+    "fitting_samples": 40940
+  }
+}
