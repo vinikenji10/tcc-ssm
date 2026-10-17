@@ -17,11 +17,14 @@ tags: [tcc, grupo, tarefas]
 
 ## Próxima prioridade
 
+Cronograma e divisão revistos em 17/10: `planejamento/revisao-plano-2026-10-17.md`, na raiz do repositório.
+
 - [ ] Grupo revisar [[E001 - Referencias lineares]] e compreender o protocolo.
 - [ ] Discutir o recorte com o orientador.
 - [ ] Confirmar sistema operacional e acesso ao PC.
-- [ ] Validar passagem direta e gradientes do Mamba-3 na implementação escolhida.
-- [ ] Executar [[E002 - Mamba-3]].
+- [x] Validar passagem direta e gradientes do Mamba-3 na implementação escolhida (17/10, PyTorch no Mac).
+- [x] Treinar a rede Mamba-3 nos dados do E001 e avaliar nas mesmas origens (17/10, `resultados/mamba3-v1`).
+- [ ] Grupo revisar [[E002 - Mamba-3]]: código, protocolo e interpretação.
 - [ ] Redigir [[Relatorio 2]] e ensaiar [[Apresentacao 2]].
 
 ## Frentes propostas, responsáveis a combinar

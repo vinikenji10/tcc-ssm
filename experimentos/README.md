@@ -62,12 +62,60 @@ Os gráficos de um passo podem mostrar curvas quase sobrepostas. A figura de vá
 
 O tempo registrado é apenas o ajuste do ARX em CPU. Não é um benchmark de inferência nem uma comparação com GPU.
 
-## Próximo passo com Mamba-3
+## Mamba-3 em PyTorch puro
 
-1. Identificar a máquina/GPU que será usada e validar importação, passagem direta e gradientes do código oficial.
-2. Treinar uma rede de regressão numérica com `treino_u` e `treino_y`, usando a normalização do treino.
-3. Selecionar configurações na validação; documentar janelas, aquecimento e reinício de estado.
-4. Avaliar nas mesmas trajetórias e origens. Adaptar o preditor para aquecer o estado usando apenas o passado e realimentar saídas previstas no horizonte.
-5. Comparar métricas e custos sob regimes explicitamente documentados.
+Desde 17/10/2026 o repositório tem um bloco Mamba-3 SISO que roda na CPU e na GPU do Mac (MPS), sem Triton nem CUDA: [mamba3_referencia.py](mamba3_referencia.py). Ele usa as funções de referência dos autores (`mamba3_siso_fwd_ref` e `mamba3_siso_step_ref`), copiadas sem alteração do commit `e9594ce1c732d97440f0332fdc43170a2294dbfa` de [state-spaces/mamba](https://github.com/state-spaces/mamba), licença Apache-2.0. O resto do módulo foi reescrito a partir de `mamba_ssm/modules/mamba3.py`, com os mesmos nomes e formatos de parâmetros.
 
-A interface `predict_step` das referências ainda não implementa uma rede com cache de estado. A adaptação para Mamba-3 precisa ser escrita e verificada. A presença desta base não confirma suporte dos kernels ao hardware futuro.
+- `forward(u)` processa a sequência inteira e é usado no treino.
+- `step(u, estado)` avança uma amostra por vez e é usado na simulação de vários passos.
+- `forward(u, return_state=True)` devolve o estado final, no formato que `step` aceita. Assim é possível aquecer com as medições e seguir realimentando previsões.
+
+Instalar as dependências adicionais:
+
+```bash
+.venv/bin/python -m pip install -r experimentos/requirements-mamba3.txt
+```
+
+Verificações (na CPU; para a GPU do Mac, prefixar com `TCC_DEVICE=mps`):
+
+```bash
+.venv/bin/python -m unittest discover -s experimentos -p 'test_mamba3*.py' -v
+```
+
+Execução registrada, com versões, erros e tempos:
+
+```bash
+.venv/bin/python experimentos/verificar_mamba3.py --output resultados/mamba3-verificacao-v2
+```
+
+A primeira execução está em [resultados/mamba3-verificacao-v1](../resultados/mamba3-verificacao-v1/resumo.md). Os tempos valem para esta implementação de referência, não para os kernels otimizados dos autores.
+
+Limites conhecidos:
+
+- `fwd_ref` tem custo quadrático no comprimento da sequência. Para janelas de até 2.048 amostras e uma camada pequena, isso não pesa.
+- Na saída do instante `t`, `fwd_ref` soma e subtrai um termo que depende de `dt` e `trap` em `t+1`. O resultado é causal, mas a saída em `t` varia na casa do arredondamento quando a entrada em `t+1` muda. `step` é exatamente causal.
+- Ainda não foi feita a comparação com o módulo oficial numa GPU NVIDIA, carregando o mesmo `state_dict`. Enquanto isso não for feito, descrever como "reimplementação a partir das funções de referência dos autores".
+
+## Treino e avaliação da rede Mamba-3 (E002)
+
+[experimento_mamba3.py](experimento_mamba3.py) treina a rede nos dados do E001 e a avalia no mesmo protocolo. A configuração fica em [config-mamba3.json](config-mamba3.json).
+
+```bash
+.venv/bin/python experimentos/experimento_mamba3.py --output resultados/mamba3-v2
+```
+
+Por padrão usa a GPU do Mac (`--device mps`); `--device cpu` também funciona. `--smoke` roda duas épocas para testar o fluxo. `--validation-only` para depois da escolha, sem ler o teste, e serve para ajustar o treino durante o desenvolvimento.
+
+O que o script faz, em ordem:
+
+1. Lê `resultados/linear-v1/`: dados, normalização do treino, origens e horizontes do E001.
+2. **Rede:** Linear(2→64), um bloco Mamba-3 com RMSNorm e conexão residual, Linear(64→1). No instante `t` entram `u[t]` e `y[t]` normalizados; sai `y[t+1]`.
+3. **Treino:** erro quadrático de um passo, em janelas de 512 amostras das trajetórias de treino, com passo de 128 entre janelas. O estado começa do zero em cada janela, e as primeiras 128 posições ficam fora da perda. AdamW, taxa com decaimento em cosseno, recorte de gradiente em 1,0, até 300 épocas.
+4. **Escolha na validação:** a cada 10 épocas, simula 50 passos nas 545 origens da validação e guarda o melhor checkpoint. Cada taxa de aprendizado candidata roda com três sementes. Vence a de menor média, entre as sementes, do RMSE da trajetória de 50 passos.
+5. **Teste:** só depois da escolha. Persistência e ARX são recalculados a partir de `modelo-arx.json` e conferidos contra as métricas gravadas no E001. A rede é avaliada nas mesmas 545 origens; o script confere que os alvos são idênticos aos do ARX.
+
+Em cada origem `t`, a rede é aquecida com as 256 medições de `t-255` a `t`, com `forward`, e depois continua com `step`, realimentando as próprias previsões. Saídas reais posteriores à origem não são lidas; um teste substitui-as por `NaN` e confere que as previsões não mudam.
+
+Verificações do protocolo: [test_experimento_mamba3.py](test_experimento_mamba3.py) confere o alinhamento das janelas, as origens e os alvos, a ausência de medições futuras e a continuação do estado. Esta última é comparada com recalcular a sequência inteira a cada passo.
+
+`experimento_linear.py` ganhou duas funções, `evaluation_origins` e `summarize_rollouts`, para que a rede use o mesmo cálculo de origens e métricas do ARX. Executado de novo depois dessa mudança, o E001 reproduziu as mesmas métricas e os mesmos dados; só os tempos de ajuste mudaram.

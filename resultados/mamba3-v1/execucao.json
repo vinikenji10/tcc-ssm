@@ -1,0 +1,28 @@
+{
+  "status": "concluido",
+  "smoke": false,
+  "created_at": "2026-10-17T15:54:31.383542-03:00",
+  "scope": "Mamba-3 SISO em PyTorch (funções de referência dos autores), planta linear do E001; MPC não executado",
+  "upstream": "state-spaces/mamba@e9594ce1c732d97440f0332fdc43170a2294dbfa",
+  "device": "mps",
+  "precision": "float32",
+  "python": "3.12.14 (main, Aug 25 2026, 13:50:33) [Clang 22.1.3 ]",
+  "platform": "macOS-26.6.2-arm64-arm-64bit",
+  "torch": "2.14.1",
+  "numpy": "2.5.4",
+  "configuration_sha256": "b0421c9d54832b8df53444760c9c08b2e9617586235e0a94b5c73afb54375c3e",
+  "source_sha256": {
+    "experimento_mamba3.py": "32ab2062181de3975ba08d5b84ea0082d9528d5d2cd970b4e611b5c419ce88ba",
+    "mamba3_referencia.py": "f969446987d251abdbd420a4914e9958649ca33420bca9933542ea923d0d2e0a",
+    "experimento_linear.py": "6b86d97eb62ef3fcaa50ef879df47740e65d92b66444ad2426f3c71ee10a9ef5"
+  },
+  "data_sha256": "201123de00e626937fb0e719a694592acd933f7bf3f2909f7c9bfa7aa04faebe",
+  "total_seconds": 2257.8126353329862,
+  "selected": "lr3e-3",
+  "selected_train_seconds": [
+    242.7000976249692,
+    234.5437518330291,
+    262.00044800003525
+  ],
+  "hardware_regime": "mps; implementação de referência, sem benchmark de inferência"
+}

@@ -21,6 +21,9 @@ A média é $(A_1+A_2+2A_3)/4$. Cada avaliação combina a nota da banca e a do 
 
 ## Plano até A2
 
+> [!info] Revisão em 17/10
+> O grupo não avançou desde A1 além da base de 12/10. O cronograma dia a dia até 27/10 foi revisto em `planejamento/revisao-plano-2026-10-17.md`, na raiz do repositório. A tabela abaixo é a versão de 12/10.
+
 | Data | Entrega pretendida | Situação em 12/10 |
 |---|---|---|
 | 11–13/10 | Recorte, protocolo e responsabilidades | Plano elaborado; discussão do grupo/orientador pendente |

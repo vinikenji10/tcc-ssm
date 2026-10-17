@@ -6,6 +6,8 @@
 
 **Atualização em 12/10:** a base experimental com planta linear, persistência e ARX foi implementada e executada localmente. Os resultados estão no [registro desta fase](registro-experimento-2026-10-12.md). Mamba-3 e MPC continuam pendentes. As seções abaixo preservam o planejamento original de 11/10.
 
+**Atualização em 17/10:** cronograma, divisão e caminho técnico do Mamba-3 revistos na [revisão de 17/10](revisao-plano-2026-10-17.md).
+
 ## 1. O avanço que a segunda entrega deve mostrar
 
 O relatório anterior apresenta o tema, as três representações do S4, o HiPPO e uma análise preliminar de complexidade. Ele declara que ainda não havia implementação, treinamento, comparação ou simulação de controle. A escolha do sistema, das ferramentas e da referência de comparação permanecia aberta.

@@ -1,7 +1,7 @@
 ---
 tipo: acompanhamento
 status: atualizado
-atualizado: 2026-10-12
+atualizado: 2026-10-17
 tags: [tcc, acompanhamento]
 ---
 
@@ -17,7 +17,7 @@ Atualização baseada nos arquivos e na execução local de 12/10/2026.
 | Dados | 30 trajetórias, 61.440 transições | [[Protocolo comum]] |
 | Persistência e ARX | Ajustados e avaliados | ARX(2,2) selecionado pela validação |
 | Verificações da base | Oito passaram | Testes físicos, causalidade e protocolo |
-| Mamba-3 | Ainda não implementado no experimento | [[E002 - Mamba-3]] |
+| Mamba-3 | Treinado e avaliado no protocolo do E001 em 17/10; três sementes | [[E002 - Mamba-3]] |
 | Comparação com Mamba-2 | Planejada | Depende de concluir o modelo principal |
 | Ruído e não linearidade | Não avaliados | Extensões posteriores |
 | MPC | Não implementado | Depende de validar a previsão |
@@ -27,11 +27,13 @@ Atualização baseada nos arquivos e na execução local de 12/10/2026.
 
 O ARX alcançou RMSE de aproximadamente **1,10 × 10⁻¹³ m** sobre trajetórias previstas de 50 passos na planta linear sem ruído. Descrever como erro próximo da precisão numérica, sem atribuir significado prático às últimas casas decimais.
 
-Isso estabelece uma referência no cenário ideal. Não há resultado de treinamento ou desempenho do Mamba-3 nesta execução.
+Isso estabelece uma referência no cenário ideal.
+
+Em 17/10, a rede com um bloco Mamba-3 errou em média **1,16 × 10⁻² m** nas mesmas simulações de 50 passos (três sementes), contra 0,684 m da persistência. Ela aprende a dinâmica, mas não chega à exatidão do ARX na planta linear sem ruído. Veja [[E002 - Mamba-3]].
 
 ## Próxima mudança de estágio
 
-Uma execução do Mamba-3 só será considerada realizada quando houver configuração, código identificado, gradientes verificados, treinamento registrado e avaliação separada no teste. Veja [[Tarefas]].
+A primeira execução do Mamba-3 está registrada. Próximos marcos: revisão do grupo, conversa com o orientador e redação do relatório 2. Extensões possíveis: Mamba-2, ruído ou mola cúbica. Veja [[Tarefas]].
 
 ## Como atualizar
 
