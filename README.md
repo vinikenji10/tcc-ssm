@@ -2,9 +2,9 @@
 
 Repositório do trabalho **Identificação de Sistemas e Controle Preditivo Baseado em Modelos de Espaço de Estados Estruturados (SSMs)**.
 
-**Estado em 12/10/2026:** a base experimental com massa–mola–amortecedor, persistência e ARX foi implementada e executada em CPU. Mamba-3, comparação com Mamba-2 e MPC permanecem pendentes.
+**Estado em 17/10/2026:** a base experimental com massa–mola–amortecedor, persistência e ARX foi implementada e executada em CPU. Uma rede com um bloco Mamba-3 SISO, em PyTorch puro a partir das funções de referência dos autores, foi treinada e avaliada no mesmo protocolo: em simulações de 50 passos errou em média 1,2 cm, contra 68 cm da persistência e precisão numérica do ARX ([resultados](resultados/mamba3-v1/resumo.md)). Comparação com Mamba-2 e MPC permanecem pendentes.
 
-Repositório público em [vinikenji10/tcc-ssm](https://github.com/vinikenji10/tcc-ssm). Os experimentos são locais e não exigem API, chave ou serviço pago.
+Repositório público em [vinikenji10/tcc-ssm](https://github.com/vinikenji10/tcc-ssm). Os experimentos são locais e não exigem API, chave ou serviço pago. O Mamba-3 não depende do HuggingFace nem de GPU NVIDIA: veja [Mamba-3 em PyTorch puro](experimentos/README.md#mamba-3-em-pytorch-puro).
 
 ## Por onde começar
 
@@ -35,6 +35,7 @@ Em Linux, macOS ou WSL2, com Python 3.12:
 ```bash
 python3.12 -m venv .venv
 .venv/bin/python -m pip install -r experimentos/requirements.txt
+.venv/bin/python -m pip install -r experimentos/requirements-mamba3.txt
 .venv/bin/python -m unittest discover -s experimentos -p 'test_*.py' -v
 .venv/bin/python experimentos/experimento_linear.py --output resultados/linear-v2
 ```

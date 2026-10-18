@@ -10,3 +10,4 @@ vault/.trash/
 .env.*
 !.env.example
 
+CLAUDE.local.md

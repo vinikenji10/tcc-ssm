@@ -36,6 +36,16 @@ Há relato de uso de Mamba-3 SISO em RTX 4060, acompanhado de divergências num�
 - [Relato de execução em RTX 4060](https://github.com/state-spaces/mamba/issues/1017).
 - [CUDA em WSL, NVIDIA](https://docs.nvidia.com/cuda/wsl-user-guide/index.html).
 
+## Atualização em 17/10/2026
+
+- O Mamba-3 está no `mamba_ssm` desde a versão 2.3.2 (PyPI, 09/05/2026). Commit proposto para fixar: `e9594ce1c732d97440f0332fdc43170a2294dbfa`, o `main` de 22/07/2026.
+- O HuggingFace não é necessário: os checkpoints `state-spaces/mamba3-*` são modelos de linguagem, e a biblioteca `transformers` não tem classe Mamba-3.
+- O caminho proposto é usar no Mac as funções de referência em PyTorch dos autores (`mamba3_siso_fwd_ref` e `mamba3_siso_step_ref`, no arquivo de testes do repositório). A verificação contra os kernels oficiais ficaria para a RTX 4060.
+- Um scan seletivo ingênuo em PyTorch, nas dimensões do plano, levou cerca de 0,27 s por passo de treino (batch 32 × 512) neste Mac, igual na CPU e no MPS. É uma medida de viabilidade, não um benchmark.
+- O kernel SISO oficial calcula internamente em bf16. Há relato sem resposta de 3 a 7,5% de erro relativo na RTX 4060 ([#1017](https://github.com/state-spaces/mamba/issues/1017)).
+
+Detalhes, tabela por máquina e cuidados de instalação: `planejamento/revisao-plano-2026-10-17.md`, seção 3.
+
 ## Verificações antes de medir desempenho
 
 Identificar versões e commit; executar a rede; calcular gradientes; comparar resultados com uma referência; confirmar aquecimento e estado; só depois medir latência. Se a implementação for adaptada, registrar essa origem nos resultados.

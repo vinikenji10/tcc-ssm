@@ -165,19 +165,29 @@ def rollout(model, u, observed_prefix, origin, horizon):
     return y_history[origin + 1:]
 
 
+def evaluation_origins(steps, settings):
+    """Origens comuns a todos os modelos: após o aquecimento, com espaço para o maior horizonte."""
+    return np.arange(settings["warmup"], steps - max(settings["horizons"]) + 1, settings["origin_stride"])
+
+
 def evaluate(model, u, y, settings):
     hmax = max(settings["horizons"])
-    origins = np.arange(settings["warmup"], u.shape[1] - hmax + 1, settings["origin_stride"])
+    origins = evaluation_origins(u.shape[1], settings)
     predictions, targets = [], []
     for episode in range(len(u)):
         for t in origins:
             predictions.append(rollout(model, u[episode], y[episode, :t + 1], int(t), hmax))
             targets.append(y[episode, t + 1:t + hmax + 1])
-    predictions, targets = np.array(predictions), np.array(targets)
+    return summarize_rollouts(model.name, model.parameters, np.array(predictions), np.array(targets),
+                              settings, len(origins))
+
+
+def summarize_rollouts(name, parameters, predictions, targets, settings, origins_per_episode):
+    """Métricas por horizonte a partir de previsões (rollouts, hmax) na ordem trajetória, origem."""
     errors = predictions - targets
     finite = np.isfinite(errors)
     if not finite.all():
-        return {"origins_per_episode": len(origins), "rollouts": len(predictions),
+        return {"origins_per_episode": origins_per_episode, "rollouts": len(predictions),
                 "nonfinite_values": int((~finite).sum()), "rows": [], "rmse_curve": None,
                 "prediction": predictions, "target": targets}
     # Um denominador comum em todos os horizontes, calculado só para expressar a métrica.
@@ -187,13 +197,13 @@ def evaluate(model, u, y, settings):
     for horizon in settings["horizons"]:
         end = float(curve[horizon - 1])
         trajectory = float(np.sqrt(np.mean(errors[:, :horizon] ** 2)))
-        rows.append({"model": model.name, "horizon_steps": horizon,
+        rows.append({"model": name, "horizon_steps": horizon,
                      "rmse_endpoint_m": end, "rmse_trajectory_m": trajectory,
                      "nrmse_endpoint": end / target_std if target_std else None,
                      "nrmse_trajectory": trajectory / target_std if target_std else None,
                      "normalization_std_m": target_std, "rollouts": len(predictions),
-                     "nonfinite_values": 0, "parameters": model.parameters})
-    return {"origins_per_episode": len(origins), "rollouts": len(predictions), "nonfinite_values": 0,
+                     "nonfinite_values": 0, "parameters": parameters})
+    return {"origins_per_episode": origins_per_episode, "rollouts": len(predictions), "nonfinite_values": 0,
             "rows": rows, "rmse_curve": curve.tolist(), "prediction": predictions, "target": targets}
 
 

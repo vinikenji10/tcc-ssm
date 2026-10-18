@@ -1,0 +1,26 @@
+[
+  {
+    "horizon_steps": 1,
+    "seeds": 3,
+    "mean_rmse_trajectory_m": 0.0011411537481637128,
+    "std_rmse_trajectory_m": 0.00011400934038555636,
+    "min_rmse_trajectory_m": 0.0010184430078891786,
+    "max_rmse_trajectory_m": 0.001243796953811049
+  },
+  {
+    "horizon_steps": 10,
+    "seeds": 3,
+    "mean_rmse_trajectory_m": 0.005863248434725482,
+    "std_rmse_trajectory_m": 0.00041566306889389084,
+    "min_rmse_trajectory_m": 0.005397321783250818,
+    "max_rmse_trajectory_m": 0.00619601182772979
+  },
+  {
+    "horizon_steps": 50,
+    "seeds": 3,
+    "mean_rmse_trajectory_m": 0.011632362597179683,
+    "std_rmse_trajectory_m": 0.001022347357968794,
+    "min_rmse_trajectory_m": 0.01049497886778844,
+    "max_rmse_trajectory_m": 0.012474847831833058
+  }
+]

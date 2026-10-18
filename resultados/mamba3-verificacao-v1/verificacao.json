@@ -1,0 +1,77 @@
+{
+  "created_at": "2026-10-17T14:58:57.097083-03:00",
+  "scope": "bloco Mamba-3 SISO em PyTorch puro; sem treino nos dados do E001",
+  "upstream": "state-spaces/mamba@e9594ce1c732d97440f0332fdc43170a2294dbfa",
+  "block_config": {
+    "d_model": 64,
+    "d_state": 64,
+    "expand": 2,
+    "headdim": 64
+  },
+  "python": "3.12.14 (main, Aug 25 2026, 13:50:33) [Clang 22.1.3 ]",
+  "platform": "macOS-26.6.2-arm64-arm-64bit",
+  "processor": "arm",
+  "torch": "2.14.1",
+  "einops": "0.8.2",
+  "source_sha256": "f969446987d251abdbd420a4914e9958649ca33420bca9933542ea923d0d2e0a",
+  "verifier_sha256": "56defc4fbf1f9b33103201ab0d6843aaf55d3dc88c78b510406ff231ff8e186e",
+  "precision": "float32",
+  "devices": {
+    "cpu": {
+      "checks": {
+        "step_ref_vs_fwd_ref_output": 3.001985078299185e-07,
+        "step_ref_vs_fwd_ref_states": {
+          "SSM": 2.9687566893699113e-06,
+          "K": 4.588965566654224e-06,
+          "V": 0.0
+        },
+        "warm_start_256_then_step_256": 1.297562107538397e-06,
+        "past_outputs_unchanged_before_t299": true,
+        "rounding_at_t299": 1.088057501874573e-07,
+        "gradients_finite": true,
+        "parameters_without_gradient": []
+      },
+      "timings": {
+        "training_step_batch32_len512": {
+          "median_s": 0.19777324999449775,
+          "max_s": 0.1978607089840807,
+          "repeats": 5
+        },
+        "rollout_545_origins_warmup256_h50": {
+          "median_s": 0.6472120829857886,
+          "max_s": 0.6526858750148676,
+          "repeats": 3
+        },
+        "network_parameters": 34821
+      }
+    },
+    "mps": {
+      "checks": {
+        "step_ref_vs_fwd_ref_output": 2.52108225140546e-06,
+        "step_ref_vs_fwd_ref_states": {
+          "SSM": 3.827068212558515e-06,
+          "K": 4.093354618817102e-06,
+          "V": 0.0
+        },
+        "warm_start_256_then_step_256": 2.7403068543208065e-06,
+        "past_outputs_unchanged_before_t299": true,
+        "rounding_at_t299": 2.150332107930808e-07,
+        "gradients_finite": true,
+        "parameters_without_gradient": []
+      },
+      "timings": {
+        "training_step_batch32_len512": {
+          "median_s": 0.08056554198265076,
+          "max_s": 0.08163808297831565,
+          "repeats": 5
+        },
+        "rollout_545_origins_warmup256_h50": {
+          "median_s": 0.4748474999796599,
+          "max_s": 0.5204675830318592,
+          "repeats": 3
+        },
+        "network_parameters": 34821
+      }
+    }
+  }
+}

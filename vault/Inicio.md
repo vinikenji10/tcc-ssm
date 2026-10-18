@@ -1,7 +1,7 @@
 ---
 tipo: indice
 status: atualizado
-atualizado: 2026-10-12
+atualizado: 2026-10-17
 tags: [tcc, inicio]
 ---
 
@@ -10,13 +10,13 @@ tags: [tcc, inicio]
 Investigamos modelos de espaço de estados estruturados para **identificar sistemas dinâmicos a partir de dados** e, depois, avaliar seu uso em controle preditivo.
 
 > [!info] Estado atual
-> Temos uma primeira base experimental executada: sistema massa–mola–amortecedor, referências persistência e ARX, dados independentes e gráficos. **Mamba-3 e MPC ainda não foram executados.**
+> Temos uma base experimental executada: sistema massa–mola–amortecedor, referências persistência e ARX, dados independentes e gráficos. Em 17/10, uma rede com Mamba-3 foi treinada e avaliada no mesmo protocolo ([[E002 - Mamba-3]]). **MPC ainda não foi executado.**
 
 ## Rota de leitura para o grupo
 
 1. [[Visao geral]] — qual é a pergunta do TCC e o recorte proposto.
 2. [[Estado atual]] — o que existe e o que ainda falta.
-3. [[E001 - Referencias lineares]] — primeiro experimento, resultados e interpretação.
+3. [[E001 - Referencias lineares]] e [[E002 - Mamba-3]] — experimentos, resultados e interpretação.
 4. [[Previsao e simulacao]] — a distinção que orienta nossa avaliação.
 5. [[Tarefas]] e [[Cronograma]] — o próximo trabalho e os prazos.
 
@@ -29,11 +29,11 @@ Investigamos modelos de espaço de estados estruturados para **identificar siste
 | [[Cronograma]] | [[Previsao e simulacao]] | [[E002 - Mamba-3]] | [[Diario]] |
 |  | [[Leituras]] | [[Infraestrutura]] | [[Relatorio 2]] e [[Apresentacao 2]] |
 
-## Primeiro resultado em uma figura
+## Resultados em uma figura
 
-![[E001-simulacao-50-passos.png]]
+![[E002-simulacao-50-passos.png]]
 
-A curva ARX coincide com a saída real nesta planta linear sem ruído. Isso é esperado em um cenário ideal de ordem adequada. Ainda precisamos avaliar o modelo neural.
+A curva ARX coincide com a saída real nesta planta linear sem ruído, como esperado num cenário ideal de ordem adequada. As três redes Mamba-3 (uma por semente) acompanham a dinâmica e se afastam alguns centímetros perto do fim dos 50 passos. Em média, erram 1,2 cm nessas simulações; a persistência erra 68 cm.
 
 ## Como manter este vault útil
 
