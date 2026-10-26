@@ -1,0 +1,20 @@
+{
+  "seed": 20261026,
+  "plant": {"mass": 1.0, "damping": 0.4, "stiffness": 4.0, "cubic_stiffness": 20.0,
+            "sample_time": 0.05, "rk4_substeps": 10},
+  "data": {
+    "train_episodes": 20,
+    "validation_episodes": 5,
+    "test_episodes": 5,
+    "steps": 2048,
+    "input_amplitude": 2.0,
+    "hold_min": 5,
+    "hold_max": 40,
+    "initial_position_limit": 0.2,
+    "initial_velocity_limit": 0.2,
+    "measurement_noise_std": 0.0
+  },
+  "evaluation": {"warmup": 256, "origin_stride": 16, "horizons": [1, 10, 50]},
+  "arx": {"output_orders": [2, 4, 8], "input_orders": [2, 4, 8], "numerical_tie_rmse": 1e-12},
+  "narx": {"orders": [2, 3, 4], "degrees": [2, 3], "numerical_tie_rmse": 1e-12}
+}

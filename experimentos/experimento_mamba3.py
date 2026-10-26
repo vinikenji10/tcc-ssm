@@ -1,5 +1,6 @@
-"""Identificação com Mamba-3 nos dados do E001: treino, escolha na validação e teste nas mesmas origens do ARX.
+"""Identificação com Mamba-3: treino, escolha na validação e teste nas mesmas origens das referências clássicas.
 
+Usa os dados de uma execução de referência (E001, planta linear; E003, Duffing).
 Convenção do E001: no instante t a rede recebe [u[t], y[t]] e prevê y[t+1].
 O treino usa erro de um passo em janelas com estado reiniciado. Configuração e checkpoint são
 escolhidos pela simulação de 50 passos na validação; o teste só é avaliado depois dessas escolhas.
@@ -27,6 +28,7 @@ import torch.nn as nn
 
 from experimento_linear import (ARX, Persistence, evaluate, evaluation_origins, rollout, summarize_rollouts,
                                 write_csv, write_json)
+from experimento_duffing import PolynomialNARX, clean_metrics
 from mamba3_referencia import Mamba3SISO
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -64,7 +66,7 @@ class Mamba3Regressor(nn.Module):
 
 
 class Normalizer:
-    """Estatísticas do treino do E001, as mesmas para a entrada y e para o alvo."""
+    """Estatísticas do treino da execução de referência, as mesmas para a entrada y e para o alvo."""
 
     def __init__(self, stats):
         self.u_mean, self.u_std = stats["u"]["mean"], stats["u"]["std"]
@@ -202,17 +204,25 @@ def load_arx(path):
     return ARX(spec["output_order"], spec["input_order"], spec["coefficients"], spec.get("diagnostics"))
 
 
-def check_against_e001(rows, data_dir):
-    """As métricas de persistência e ARX recalculadas aqui devem ser as gravadas no E001."""
+def load_references(data_dir):
+    """Persistência, ARX e, se a execução de referência tiver, NARX polinomial."""
+    references = [Persistence(), load_arx(data_dir / "modelo-arx.json")]
+    if (data_dir / "modelo-narx.json").exists():
+        references.append(PolynomialNARX.from_dict(json.loads((data_dir / "modelo-narx.json").read_text())))
+    return references
+
+
+def check_against_reference(rows, data_dir):
+    """As métricas das referências clássicas recalculadas aqui devem ser as gravadas na execução de referência."""
     with (data_dir / "metricas-teste.csv").open() as f:
         stored = {(r["model"], int(r["horizon_steps"])): float(r["rmse_trajectory_m"]) for r in csv.DictReader(f)}
     for row in rows:
         reference = stored[(row["model"], row["horizon_steps"])]
         if not math.isclose(row["rmse_trajectory_m"], reference, rel_tol=1e-9, abs_tol=1e-18):
-            raise RuntimeError(f"{row['model']} H={row['horizon_steps']} difere do E001.")
+            raise RuntimeError(f"{row['model']} H={row['horizon_steps']} difere da execução de referência.")
 
 
-def make_plots(out, signals, arx, nets, results, runs, settings, history, norm, device, sample_time):
+def make_plots(out, signals, references, nets, results, runs, settings, history, norm, device, sample_time):
     os.environ.setdefault("MPLCONFIGDIR", str(out / ".cache" / "matplotlib"))
     import matplotlib
     matplotlib.use("Agg")
@@ -220,7 +230,11 @@ def make_plots(out, signals, arx, nets, results, runs, settings, history, norm, 
     plt.rcParams.update({"font.size": 10, "axes.spines.top": False, "axes.spines.right": False,
                          "axes.grid": True, "grid.alpha": 0.2, "figure.dpi": 120,
                          "savefig.dpi": 180, "font.family": "DejaVu Sans"})
-    colors = {"real": "#112D4E", "arx": "#3F72AF", "persistence": "#D97706", "mamba": "#059669"}
+    colors = {"real": "#112D4E", "arx": "#3F72AF", "narx": "#B91C1C", "persistence": "#D97706", "mamba": "#059669"}
+
+    def color(name):
+        return (colors["persistence"] if name == "Persistência" else colors["narx"] if name.startswith("NARX")
+                else colors["arx"] if name.startswith("ARX") else colors["mamba"])
     figures = out / "figuras"
     figures.mkdir()
 
@@ -252,16 +266,20 @@ def make_plots(out, signals, arx, nets, results, runs, settings, history, norm, 
     first = next(iter(nets))
     one_step = simulate(nets[first], u, y, np.arange(origin, origin + n), history, 1, norm, device)[:, 0]
     actual = y[0, origin + 1:origin + n + 1]
-    arx_step = np.array([arx.predict_step(u[0, :t + 1], y[0, :t + 1]) for t in range(origin, origin + n)])
+    classical = [model for model in references if not isinstance(model, Persistence)]
+    steps_classical = {model.name: np.array([model.predict_step(u[0, :t + 1], y[0, :t + 1]) for t in range(origin, origin + n)])
+                       for model in classical}
     time = (np.arange(n) + origin + 1) * sample_time
     fig, ax = plt.subplots(2, 1, figsize=(9, 5), sharex=True, layout="constrained")
     ax[0].plot(time, actual, color=colors["real"], label="Medida")
-    ax[0].plot(time, arx_step, "--", color=colors["arx"], label=arx.name)
+    for name, values in steps_classical.items():
+        ax[0].plot(time, values, "--", color=color(name), label=name)
     ax[0].plot(time, one_step, ":", color=colors["mamba"], lw=2, label=first)
     ax[0].set(ylabel="Posição [m]", title="Previsão de um passo com histórico medido real")
-    ax[0].legend(ncols=3)
+    ax[0].legend(ncols=4, fontsize=8)
     ax[1].plot(time, one_step - actual, color=colors["mamba"], label=f"Erro {first}")
-    ax[1].plot(time, arx_step - actual, color=colors["arx"], label=f"Erro {arx.name}")
+    for name, values in steps_classical.items():
+        ax[1].plot(time, values - actual, color=color(name), label=f"Erro {name}")
     ax[1].set(xlabel="Tempo [s]", ylabel="Previsto − medido [m]")
     ax[1].legend()
     save(fig, "02-previsao-um-passo")
@@ -270,9 +288,9 @@ def make_plots(out, signals, arx, nets, results, runs, settings, history, norm, 
     steps = np.arange(horizon + 1) * sample_time
     fig, ax = plt.subplots(figsize=(9, 4), layout="constrained")
     ax.plot(steps, y[0, origin:origin + horizon + 1], color=colors["real"], lw=2, label="Medida")
-    for model, color in [(arx, colors["arx"]), (Persistence(), colors["persistence"])]:
+    for model in references:
         values = np.r_[y[0, origin], rollout(model, u[0], y[0, :origin + 1], origin, horizon)]
-        ax.plot(steps, values, "--", color=color, label=model.name)
+        ax.plot(steps, values, "--", color=color(model.name), label=model.name)
     for name, net in nets.items():
         values = np.r_[y[0, origin], simulate(net, u, y, [origin], history, horizon, norm, device)[0]]
         ax.plot(steps, values, ":", color=colors["mamba"], lw=1.5, alpha=0.9, label=name)
@@ -286,8 +304,7 @@ def make_plots(out, signals, arx, nets, results, runs, settings, history, norm, 
     for name, result in results.items():
         if result["rmse_curve"] is None:
             continue
-        color = colors["persistence"] if name == "Persistência" else colors["arx"] if name.startswith("ARX") else colors["mamba"]
-        ax.plot(np.arange(1, horizon + 1), result["rmse_curve"], color=color,
+        ax.plot(np.arange(1, horizon + 1), result["rmse_curve"], color=color(name),
                 alpha=1.0 if not name.startswith("Mamba") else 0.8, label=name)
     ax.set(yscale="log", xlabel="Passo futuro", ylabel="RMSE no ponto final [m]", title="Erro por horizonte no teste")
     ax.legend(fontsize=8)
@@ -355,9 +372,10 @@ def run(config_path, output_path, device, smoke=False, validation_only=False):
 
     # Teste: lido só agora, depois das escolhas.
     test_u, test_y = signals["teste_u"], signals["teste_y"]
-    arx = load_arx(data_dir / "modelo-arx.json")
-    results = {model.name: evaluate(model, test_u, test_y, settings) for model in (Persistence(), arx)}
-    check_against_e001([row for r in results.values() for row in r["rows"]], data_dir)
+    references = load_references(data_dir)
+    arx = references[1]
+    results = {model.name: evaluate(model, test_u, test_y, settings) for model in references}
+    check_against_reference([row for r in results.values() for row in r["rows"]], data_dir)
     nets = {}
     for seed in config["seeds"]:
         network, path = states[(selected, seed)]
@@ -371,6 +389,12 @@ def run(config_path, output_path, device, smoke=False, validation_only=False):
 
     rows = [row for result in results.values() for row in result["rows"]]
     write_csv(out / "metricas-teste.csv", rows)
+    clean_path = data_dir / "diagnostico" / "saida-sem-ruido.npz"
+    clean_rows = []
+    if clean_path.exists():  # dados com ruído: relatar também o erro em relação à posição sem ruído
+        y_clean = np.load(clean_path)["teste_y"]
+        clean_rows = [row for r in results.values() for row in clean_metrics(r, y_clean, settings)["rows"]]
+        write_csv(out / "metricas-teste-sem-ruido.csv", clean_rows)
     write_json(out / "avaliacao-teste.json", {name: {k: v for k, v in r.items() if k not in ("prediction", "target")}
                                             for name, r in results.items()})
     summary = []
@@ -382,12 +406,12 @@ def run(config_path, output_path, device, smoke=False, validation_only=False):
     write_json(out / "resumo-sementes.json", summary)
 
     plant = json.loads((data_dir / "config.json").read_text())["plant"]
-    make_plots(out, signals, arx, nets, results, runs, settings, history, norm, device, plant["sample_time"])
+    make_plots(out, signals, references, nets, results, runs, settings, history, norm, device, plant["sample_time"])
 
     selected_runs = runs[selected]
     metadata = {"status": "concluido", "smoke": smoke,
                 "created_at": datetime.now(ZoneInfo("America/Sao_Paulo")).isoformat(),
-                "scope": "Mamba-3 SISO em PyTorch (funções de referência dos autores), planta linear do E001; MPC não executado",
+                "scope": f"Mamba-3 SISO em PyTorch (funções de referência dos autores), {config.get('plant_description', 'planta linear do E001')}; MPC não executado",
                 "upstream": UPSTREAM, "device": device, "precision": "float32",
                 "python": sys.version, "platform": platform.platform(), "torch": torch.__version__,
                 "numpy": np.__version__,
@@ -401,9 +425,11 @@ def run(config_path, output_path, device, smoke=False, validation_only=False):
                 "hardware_regime": f"{device}; implementação de referência, sem benchmark de inferência"}
     write_json(out / "execucao.json", metadata)
 
-    text = ["# Mamba-3 nos dados do E001", "",
+    label = config.get("label", "E001")
+    text = [f"# Mamba-3 nos dados do {label}", "",
             ("**Execução de verificação do fluxo (smoke): não usar como resultado.**" if smoke else
-             "Execução local concluída. Planta linear simulada, sem ruído; mesmos dados, normalização, origens e métricas do E001."), "",
+             f"Execução local concluída. {config.get('plant_description', 'Planta linear simulada, sem ruído')}; "
+             f"mesmos dados, normalização, origens e métricas do {label}."), "",
             f"Implementação: Mamba-3 SISO em PyTorch, a partir das funções de referência de `{UPSTREAM}`, float32, dispositivo `{device}`.",
             f"Rede: Linear(2→{config['network']['d_model']}), {config['network']['n_layers']} bloco(s) Mamba-3 com RMSNorm e residual, "
             f"Linear({config['network']['d_model']}→1); {selected_runs[0]['parameters']} parâmetros.", "",
@@ -425,10 +451,16 @@ def run(config_path, output_path, device, smoke=False, validation_only=False):
     for s in summary:
         std = f"{s['std_rmse_trajectory_m']:.2e}" if s["std_rmse_trajectory_m"] is not None else "-"
         text.append(f"| {s['horizon_steps']} | {s['mean_rmse_trajectory_m']:.3e} | {std} | {s['min_rmse_trajectory_m']:.3e} | {s['max_rmse_trajectory_m']:.3e} |")
+    if clean_rows:
+        text += ["", "Mesmas previsões, comparadas com a posição sem ruído (`metricas-teste-sem-ruido.csv`):", "",
+                 "| Modelo | Horizonte [passos] | RMSE final [m] | RMSE da trajetória [m] |", "|---|---:|---:|---:|"]
+        for row in clean_rows:
+            text.append(f"| {row['model']} | {row['horizon_steps']} | {row['rmse_endpoint_m']:.3e} | {row['rmse_trajectory_m']:.3e} |")
     text += ["", "## Como ler", "",
-             "Persistência e ARX foram recalculados a partir do modelo gravado no E001 e conferidos contra as métricas daquela execução. As previsões da rede usam as mesmas 545 origens e os mesmos alvos.",
+             f"As referências clássicas foram recalculadas a partir dos modelos gravados no {label} e conferidas contra as métricas daquela execução. As previsões da rede usam as mesmas origens e os mesmos alvos.",
              f"Em cada origem, a rede é aquecida com as {history} medições até a origem, inclusive, e depois realimenta as próprias previsões; saídas futuras reais não entram.",
-             "Na planta linear sem ruído, o ARX chega à precisão numérica. A pergunta aqui é se a rede aprende a dinâmica e quanto erra, não se supera o ARX.",
+             *([config["reading_note"]] if "reading_note" in config else
+               ["Na planta linear sem ruído, o ARX chega à precisão numérica. A pergunta aqui é se a rede aprende a dinâmica e quanto erra, não se supera o ARX."]),
              "Com três sementes, a dispersão é indicativa; não sustenta uma conclusão estatística ampla.",
              "Tempos de treino desta implementação de referência; não representam os kernels dos autores.", "",
              "## Artefatos", "", "- `config.json`, `selecao-validacao.json`: configuração, curvas e escolha.",

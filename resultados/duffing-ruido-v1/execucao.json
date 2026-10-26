@@ -1,0 +1,22 @@
+{
+  "status": "concluido",
+  "created_at": "2026-10-26T09:18:24.006432-03:00",
+  "scope": "planta de Duffing simulada, persistência, ARX e NARX polinomial; Mamba-3 em execução separada",
+  "python": "3.12.14 (main, Aug 25 2026, 13:50:33) [Clang 22.1.3 ]",
+  "platform": "macOS-26.6.2-arm64-arm-64bit",
+  "numpy": "2.5.4",
+  "scipy": "1.18.1",
+  "matplotlib": "3.11.2",
+  "configuration_sha256": "fe1845c1ec2acd8100642b9cbf455f7cbb582bb03d141f22f6e3cd452581a908",
+  "source_sha256": "3620466e153d40bb80534fab2c30e21e72fc54e6ffa04189c893f72a226a0b9b",
+  "data_sha256": "13b56dc66d5c26e99590b5ec4ef9ec6b983f033d91997058ef131ca3109709e0",
+  "generation_seconds": 0.9571309169987217,
+  "selected_arx_fitting_seconds": 0.00606516603147611,
+  "selected_narx_fitting_seconds": 0.1519856249797158,
+  "test_evaluation_seconds": {
+    "Persistência": 0.00647899997420609,
+    "ARX(8,8)": 0.06850112497340888,
+    "NARX(4,4) grau 3": 0.1179076669504866
+  },
+  "hardware_regime": "CPU; tempos de ajuste e de avaliação em Python, sem benchmark"
+}

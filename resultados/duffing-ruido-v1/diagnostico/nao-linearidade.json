@@ -1,0 +1,9 @@
+{
+  "position_min_m": -0.7702378927230379,
+  "position_max_m": 0.8483863528775702,
+  "position_std_m": 0.27609103405305524,
+  "rms_linear_force_N": 1.104364156318795,
+  "rms_cubic_force_N": 1.193439457357357,
+  "cubic_to_linear_rms_ratio": 1.080657544460225,
+  "max_cubic_to_linear_ratio": 3.5987970187445257
+}

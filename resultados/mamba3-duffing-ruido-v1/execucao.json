@@ -1,0 +1,28 @@
+{
+  "status": "concluido",
+  "smoke": false,
+  "created_at": "2026-10-26T10:26:55.398689-03:00",
+  "scope": "Mamba-3 SISO em PyTorch (funções de referência dos autores), Oscilador de Duffing (mola cúbica) simulado, com ruído de medição gaussiano de desvio 0,02 m; MPC não executado",
+  "upstream": "state-spaces/mamba@e9594ce1c732d97440f0332fdc43170a2294dbfa",
+  "device": "mps",
+  "precision": "float32",
+  "python": "3.12.14 (main, Aug 25 2026, 13:50:33) [Clang 22.1.3 ]",
+  "platform": "macOS-26.6.2-arm64-arm-64bit",
+  "torch": "2.14.1",
+  "numpy": "2.5.4",
+  "configuration_sha256": "7b3430c96d8fabb2a4d80f3e937b50659e015407497eee065b39c98ecba8aa5f",
+  "source_sha256": {
+    "experimento_mamba3.py": "56d1d8fb9c75fc667222b2520a0315db98b910a4583e6491d871a9acbcb7c198",
+    "mamba3_referencia.py": "f969446987d251abdbd420a4914e9958649ca33420bca9933542ea923d0d2e0a",
+    "experimento_linear.py": "6b86d97eb62ef3fcaa50ef879df47740e65d92b66444ad2426f3c71ee10a9ef5"
+  },
+  "data_sha256": "13b56dc66d5c26e99590b5ec4ef9ec6b983f033d91997058ef131ca3109709e0",
+  "total_seconds": 2215.3442983749555,
+  "selected": "lr3e-3",
+  "selected_train_seconds": [
+    237.76983454200672,
+    234.11660916695837,
+    236.80022845801432
+  ],
+  "hardware_regime": "mps; implementação de referência, sem benchmark de inferência"
+}

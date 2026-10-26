@@ -40,6 +40,9 @@ Se a rede não produzir previsões até 20/10, fechar a fase com o que foi efeti
 
 ## Novembro e dezembro
 
+> [!info] Revisão em 26/10
+> Com a nova tese, o cronograma de novembro está no relatório 2, seção 5: referências tradicionais mais fortes (NARX por erro de simulação, FROLS, NARMAX), não linearidade não polinomial, varredura de ruído e de dados, benchmark Silverbox e custo computacional. A tabela abaixo é a versão de 12/10.
+
 | Período | Resultado a perseguir |
 |---|---|
 | 28/10–08/11 | Incorporar feedback; consolidar execução; completar Mamba-2 se viável |

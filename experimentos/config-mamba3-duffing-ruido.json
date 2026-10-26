@@ -1,0 +1,28 @@
+{
+  "data": "resultados/duffing-ruido-v1",
+  "label": "E004",
+  "plant_description": "Oscilador de Duffing (mola cúbica) simulado, com ruído de medição gaussiano de desvio 0,02 m",
+  "reading_note": "Com ruído de medição, o NARX polinomial é ajustado pelo erro de equação com regressores ruidosos. A tabela principal mede o erro contra a posição medida, com ruído; a tabela sem ruído mede o erro contra a posição verdadeira da planta.",
+  "network": {"d_model": 64, "n_layers": 1, "d_state": 64, "expand": 2, "headdim": 64},
+  "training": {
+    "window": 512,
+    "window_stride": 128,
+    "loss_skip": 128,
+    "batch_size": 32,
+    "learning_rate": 0.001,
+    "lr_schedule": "cosine",
+    "weight_decay": 0.0,
+    "grad_clip": 1.0,
+    "max_epochs": 300,
+    "eval_every": 10,
+    "max_minutes_per_run": 20
+  },
+  "history": 256,
+  "candidates": [
+    {"name": "lr1e-3", "training": {"learning_rate": 0.001}},
+    {"name": "lr3e-3", "training": {"learning_rate": 0.003}},
+    {"name": "lr1e-2", "training": {"learning_rate": 0.01}}
+  ],
+  "seeds": [1, 2, 3],
+  "selection": "média, entre as sementes, do menor RMSE da trajetória de 50 passos na validação"
+}

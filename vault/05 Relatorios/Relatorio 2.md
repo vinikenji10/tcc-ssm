@@ -1,12 +1,15 @@
 ---
 tipo: entrega
-status: estrutura-em-preparacao
+status: redigido-revisao-do-grupo
 prazo: 2026-10-26
-atualizado: 2026-10-12
+atualizado: 2026-10-26
 tags: [tcc, relatorio]
 ---
 
 # Relatório 2
+
+> [!info] 26/10
+> Versão em LaTeX em `relatorio-2/relatorio-2.tex`, com figuras em `relatorio-2/figuras/` e PDF compilado em `relatorio-2/relatorio-2.pdf`. A estrutura segue o pedido do orientador: (1) resumo do artigo de Cevaal, de Jong e Lazar; (2) ensaios E001 a E004; (3) tese. Veja [[Decisao 2026-10 - Tese identificacao vs tradicionais]]. A estrutura abaixo é a versão de 12/10, substituída.
 
 **Entrega:** 26/10/2026 até 20h, segundo os mesmos procedimentos da primeira avaliação. Enviar no Moodle e encaminhar ao orientador. A redação final ainda não está concluída.
 

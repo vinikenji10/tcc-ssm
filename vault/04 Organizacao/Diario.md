@@ -35,5 +35,23 @@ Montado o bloco Mamba-3 SISO em PyTorch puro a partir das funções de referênc
 
 Treinada a rede com um bloco Mamba-3 nos dados do E001, com apoio do assistente. Três taxas de aprendizado × três sementes, escolha pela simulação de 50 passos na validação, teste nas mesmas 545 origens do ARX. Resultado em 50 passos: (1,16 ± 0,10) × 10⁻² m, contra 0,684 m da persistência e 1,1 × 10⁻¹³ m do ARX. Veja [[E002 - Mamba-3]].
 
+## 26/10/2026 - nova tese, E003 e E004
+
+O grupo conversou com o orientador e reorientou o TCC: identificação por SSMs comparada a métodos tradicionais, sem o MPC como objetivo. Veja [[Decisao 2026-10 - Tese identificacao vs tradicionais]]. Para isso, foram executados com apoio do assistente:
+
+- [[E003 - Duffing]]: mola cúbica, sem ruído. ARX 8,9 cm, NARX polinomial 5,5 × 10⁻⁹ m, Mamba-3 (1,53 ± 0,61) cm em 50 passos.
+- [[E004 - Duffing com ruido]]: ruído de 2 cm. ARX 10,2 cm, NARX 14,5 cm, Mamba-3 (1,54 ± 0,28) cm, medidos contra a posição sem ruído.
+
+O NARX foi ajustado da forma mais simples, sem as correções tradicionais para ruído. Relatório 2 redigido em LaTeX (`relatorio-2/`).
+
+## 26/10/2026 - revisão do relatório 2
+
+Revisão metodológica, feita pelo assistente e por um revisor independente. Não foram encontrados bugs nem vazamento de dados, mas sim erros de interpretação, todos corrigidos no relatório e nas notas:
+- A vantagem da rede no E004 era artefato da grade do NARX: com 10 atrasos, o NARX chega a 1,9 cm. O diagnóstico está em `resultados/diagnostico-e004-v1/`.
+- O NARX não "contém" o Duffing; ele o aproxima com quatro atrasos.
+- Comparações entre plantas passaram a usar NRMSE.
+- A tese ganhou limiares, a exigência de uma GRU como referência e grades definidas antes de ver os dados. H3 está em aberto.
+- O título passou a ser "Identificação de Sistemas Dinâmicos com Modelos de Espaço de Estados Estruturados (SSMs): comparação com métodos tradicionais de identificação".
+
 Para próximas entradas, registrar data, o que mudou, resultado verificável e próximo passo. Conversas com orientador devem ter uma nota própria baseada em [[Reuniao]].
 
