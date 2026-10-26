@@ -1,0 +1,181 @@
+{
+  "aviso": "Diagnóstico posterior ao teste do E003/E004: sensibilidade das referências clássicas à grade e à condição inicial.\n\nATENÇÃO: foi feito depois de ver as métricas de teste do E004. Serve para entender os resultados, não para\nescolher modelos; nenhuma linha daqui substitui as execuções duffing-ruido-v1 e mamba3-duffing-ruido-v1.\nO critério de escolha que o protocolo usaria (validação, 50 passos) é registrado ao lado do teste.",
+  "metrica": "RMSE da trajetória de 50 passos [m]; no E004, teste contra a posição sem ruído",
+  "narx_grau3_e004": [
+    {
+      "model": "NARX(2,2) grau 3",
+      "parameters": 35,
+      "rank": 35,
+      "validation": 0.2609062284860872,
+      "test_clean": 0.25659394253562834,
+      "seconds": 0.19596716697560623
+    },
+    {
+      "model": "NARX(3,3) grau 3",
+      "parameters": 84,
+      "rank": 77,
+      "validation": 0.21074103746617173,
+      "test_clean": 0.20675546021687077,
+      "seconds": 0.2578317919978872
+    },
+    {
+      "model": "NARX(4,4) grau 3",
+      "parameters": 165,
+      "rank": 140,
+      "validation": 0.14868879151141284,
+      "test_clean": 0.14532280568979222,
+      "seconds": 0.35274374997243285
+    },
+    {
+      "model": "NARX(5,5) grau 3",
+      "parameters": 286,
+      "rank": 228,
+      "validation": 0.09741534659517968,
+      "test_clean": 0.094209334048942,
+      "seconds": 0.5081927090068348
+    },
+    {
+      "model": "NARX(6,6) grau 3",
+      "parameters": 455,
+      "rank": 345,
+      "validation": 0.06171916708777223,
+      "test_clean": 0.058634420643767025,
+      "seconds": 0.6846207499620505
+    },
+    {
+      "model": "NARX(7,7) grau 3",
+      "parameters": 680,
+      "rank": 506,
+      "validation": 0.043607467956231036,
+      "test_clean": 0.03964939864348838,
+      "seconds": 1.0877448749961331
+    },
+    {
+      "model": "NARX(8,8) grau 3",
+      "parameters": 969,
+      "rank": 718,
+      "validation": 0.03421341985668478,
+      "test_clean": 0.028734426040264147,
+      "seconds": 1.76556841598358
+    },
+    {
+      "model": "NARX(10,10) grau 3",
+      "parameters": 1771,
+      "rank": 1323,
+      "validation": 0.027165061713775217,
+      "test_clean": 0.018928784195256478,
+      "seconds": 4.62379833398154
+    },
+    {
+      "model": "NARX(12,12) grau 3",
+      "parameters": 2925,
+      "rank": 2217,
+      "validation": 0.024750136737059798,
+      "test_clean": null,
+      "seconds": 10.841408749984112
+    },
+    {
+      "model": "NARX(14,14) grau 3",
+      "parameters": 4495,
+      "rank": 3463,
+      "validation": null,
+      "test_clean": null,
+      "seconds": 24.609864333993755
+    }
+  ],
+  "arx_e004": [
+    {
+      "model": "ARX(8,8)",
+      "validation": 0.1077706060713497,
+      "test": 0.10208740654410921
+    },
+    {
+      "model": "ARX(16,16)",
+      "validation": 0.10641829961126673,
+      "test": 0.10121771391941221
+    },
+    {
+      "model": "ARX(32,32)",
+      "validation": 0.10492419978434236,
+      "test": 0.09989293966671406
+    },
+    {
+      "model": "ARX(64,64)",
+      "validation": 0.1043399750965461,
+      "test": 0.09948964325402053
+    }
+  ],
+  "arx_e003": [
+    {
+      "model": "ARX(8,8)",
+      "validation": 0.09032484172440516,
+      "test": 0.08915243100694337
+    },
+    {
+      "model": "ARX(16,16)",
+      "validation": 0.08963719789544257,
+      "test": 0.08886927809150465
+    },
+    {
+      "model": "ARX(32,32)",
+      "validation": 0.08909812241000266,
+      "test": 0.08766657037345832
+    },
+    {
+      "model": "ARX(64,64)",
+      "validation": 0.08898185639744717,
+      "test": 0.08790335959186187
+    }
+  ],
+  "narx_grau3_e003": [
+    {
+      "model": "NARX(2,2) grau 3",
+      "parameters": 35,
+      "rank": 35,
+      "condition_number_scaled": 16203.202210720958,
+      "validation": 0.0001352573521141708,
+      "test": 0.00014261605125859224
+    },
+    {
+      "model": "NARX(3,3) grau 3",
+      "parameters": 84,
+      "rank": 77,
+      "condition_number_scaled": 1.0517678956242286e+16,
+      "validation": null,
+      "test": null
+    },
+    {
+      "model": "NARX(4,4) grau 3",
+      "parameters": 165,
+      "rank": 137,
+      "condition_number_scaled": 1.669295519271852e+16,
+      "validation": 4.701833633741284e-09,
+      "test": 5.529873740158639e-09
+    },
+    {
+      "model": "NARX(5,5) grau 3",
+      "parameters": 286,
+      "rank": 216,
+      "condition_number_scaled": 2.976799975321651e+16,
+      "validation": 2.7741718871280094e-10,
+      "test": 3.047172671745495e-10
+    },
+    {
+      "model": "NARX(6,6) grau 3",
+      "parameters": 455,
+      "rank": 307,
+      "condition_number_scaled": 6.026627918167389e+16,
+      "validation": 2.9464554214377777e-09,
+      "test": 2.2683917846108857e-07
+    }
+  ],
+  "decomposicao_narx44": {
+    "ajuste_ruidoso_condicao_inicial_ruidosa": 0.14532280568979222,
+    "ajuste_ruidoso_condicao_inicial_limpa": 0.14301641791023972,
+    "ajuste_limpo_condicao_inicial_ruidosa": 0.05078390477562242
+  },
+  "posto_monomios_so_entrada_n4_grau3": {
+    "rank": 22,
+    "columns": 35
+  }
+}

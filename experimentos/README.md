@@ -119,3 +119,29 @@ Em cada origem `t`, a rede é aquecida com as 256 medições de `t-255` a `t`, c
 Verificações do protocolo: [test_experimento_mamba3.py](test_experimento_mamba3.py) confere o alinhamento das janelas, as origens e os alvos, a ausência de medições futuras e a continuação do estado. Esta última é comparada com recalcular a sequência inteira a cada passo.
 
 `experimento_linear.py` ganhou duas funções, `evaluation_origins` e `summarize_rollouts`, para que a rede use o mesmo cálculo de origens e métricas do ARX. Executado de novo depois dessa mudança, o E001 reproduziu as mesmas métricas e os mesmos dados; só os tempos de ajuste mudaram.
+
+## Planta de Duffing e NARX polinomial (E003 e E004)
+
+[experimento_duffing.py](experimento_duffing.py) troca a planta pelo oscilador de Duffing, `m p'' + c p' + k p + k3 p³ = u`, integrado por RK4 com subpassos sob segurador de ordem zero. A força passa a ter amplitude sorteada em cada patamar (APRBS), para excitar a não linearidade em vários níveis. A divisão por trajetória, as origens, os horizontes e as métricas são os do E001.
+
+Além de persistência e ARX, o script ajusta um **NARX polinomial**: todos os monômios até o grau `g` de `y[t..t-n+1]` e `u[t..t-n+1]`, por mínimos quadrados do erro de um passo, com `n` e `g` escolhidos pela simulação de 50 passos na validação. Candidatos que divergem na simulação são registrados e descartados.
+
+```bash
+.venv/bin/python experimentos/experimento_duffing.py --output resultados/duffing-v2
+.venv/bin/python experimentos/experimento_duffing.py --config experimentos/config-duffing-ruido.json --output resultados/duffing-ruido-v2
+```
+
+Com ruído de medição, o script também grava a posição sem ruído em `diagnostico/saida-sem-ruido.npz`, fora dos dados dos modelos. As mesmas previsões são então medidas contra a posição sem ruído, em `metricas-teste-sem-ruido.csv`. Isso serve só para relatar o erro; nenhuma escolha usa esses valores.
+
+A rede Mamba-3 usa o mesmo [experimento_mamba3.py](experimento_mamba3.py), apontando para a execução de referência:
+
+```bash
+.venv/bin/python experimentos/experimento_mamba3.py --config experimentos/config-mamba3-duffing.json --output resultados/mamba3-duffing-v2
+.venv/bin/python experimentos/experimento_mamba3.py --config experimentos/config-mamba3-duffing-ruido.json --output resultados/mamba3-duffing-ruido-v2
+```
+
+Quando a execução de referência tem `modelo-narx.json`, o NARX entra nas tabelas e nas figuras ao lado de persistência e ARX. As verificações estão em [test_experimento_duffing.py](test_experimento_duffing.py): sem o termo cúbico, a integração coincide com a discretização exata do E001; o equilíbrio estático resolve a equação cúbica; os subpassos convergem; e o NARX recupera exatamente um mapa polinomial conhecido.
+
+[figuras_relatorio_2.py](figuras_relatorio_2.py) recarrega os modelos gravados do E003 e do E004 e produz as duas figuras de comparação do relatório 2 em `relatorio-2/figuras/`. Não treina nem escolhe nada.
+
+[diagnostico_e004.py](diagnostico_e004.py) é um diagnóstico **posterior ao teste**: amplia a grade de ARX e NARX nos dados do E003/E004 e separa as fontes de erro do NARX com ruído (coeficientes enviesados contra condição inicial ruidosa). Serve para interpretar os resultados e não substitui as execuções registradas. Saída em `resultados/diagnostico-e004-v1/`.

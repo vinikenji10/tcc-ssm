@@ -2,7 +2,7 @@
 
 Repositório do trabalho **Identificação de Sistemas e Controle Preditivo Baseado em Modelos de Espaço de Estados Estruturados (SSMs)**.
 
-**Estado em 17/10/2026:** a base experimental com massa–mola–amortecedor, persistência e ARX foi implementada e executada em CPU. Uma rede com um bloco Mamba-3 SISO, em PyTorch puro a partir das funções de referência dos autores, foi treinada e avaliada no mesmo protocolo: em simulações de 50 passos errou em média 1,2 cm, contra 68 cm da persistência e precisão numérica do ARX ([resultados](resultados/mamba3-v1/resumo.md)). Comparação com Mamba-2 e MPC permanecem pendentes.
+**Estado em 26/10/2026:** com o orientador, a tese passou a ser a identificação por SSMs comparada a métodos tradicionais; o MPC deixou de ser objetivo. Além do E001 (planta linear, ARX) e do E002 (Mamba-3 na mesma planta), foram executados o E003 (oscilador de Duffing, com NARX polinomial) e o E004 (Duffing com ruído de medição). Em 50 passos, a rede errou cerca de 1,5 cm nos dois casos (NRMSE de 5,4–5,5%). O NARX polinomial foi quase exato sem ruído; com ruído, ficou equivalente à rede quando recebeu atrasos suficientes, mas mostrou-se numericamente frágil ([diagnóstico](resultados/diagnostico-e004-v1/diagnostico.json)). O relatório 2 está em [relatorio-2/](relatorio-2/).
 
 Repositório público em [vinikenji10/tcc-ssm](https://github.com/vinikenji10/tcc-ssm). Os experimentos são locais e não exigem API, chave ou serviço pago. O Mamba-3 não depende do HuggingFace nem de GPU NVIDIA: veja [Mamba-3 em PyTorch puro](experimentos/README.md#mamba-3-em-pytorch-puro).
 
@@ -20,6 +20,7 @@ Repositório público em [vinikenji10/tcc-ssm](https://github.com/vinikenji10/tc
 | `experimentos/` | Código, configuração, dependências e verificações da base experimental |
 | `resultados/linear-v1/` | Dados, métricas, modelo ARX, figuras e registro da primeira execução |
 | `planejamento/` | Plano detalhado e registro de atividades para o relatório 2 |
+| `relatorio-2/` | Relatório 2 em LaTeX (para o Overleaf), figuras e PDF compilado |
 | `TCC_SSM_relatorio_1.pdf` | Relatório entregue em 14/09/2026 |
 
 ## Abrir no Obsidian

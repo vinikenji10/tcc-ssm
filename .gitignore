@@ -11,3 +11,4 @@ vault/.trash/
 !.env.example
 
 CLAUDE.local.md
+relatorio-2/*.zip

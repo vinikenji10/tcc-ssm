@@ -1,7 +1,7 @@
 ---
 tipo: indice
 status: atualizado
-atualizado: 2026-10-17
+atualizado: 2026-10-26
 tags: [tcc, inicio]
 ---
 
@@ -10,7 +10,7 @@ tags: [tcc, inicio]
 Investigamos modelos de espaço de estados estruturados para **identificar sistemas dinâmicos a partir de dados** e, depois, avaliar seu uso em controle preditivo.
 
 > [!info] Estado atual
-> Temos uma base experimental executada: sistema massa–mola–amortecedor, referências persistência e ARX, dados independentes e gráficos. Em 17/10, uma rede com Mamba-3 foi treinada e avaliada no mesmo protocolo ([[E002 - Mamba-3]]). **MPC ainda não foi executado.**
+> Temos uma base experimental executada: sistema massa–mola–amortecedor, referências persistência e ARX, dados independentes e gráficos. Em 17/10, uma rede com Mamba-3 foi treinada e avaliada no mesmo protocolo ([[E002 - Mamba-3]]). Em 26/10, a tese passou a ser **identificação por SSMs comparada a métodos tradicionais** ([[Decisao 2026-10 - Tese identificacao vs tradicionais]]), e foram executados [[E003 - Duffing]] e [[E004 - Duffing com ruido]]. O MPC deixou de ser objetivo. Depois da revisão de 26/10, a vantagem da rede sobre o NARX com ruído ficou em aberto (artefato de grade).
 
 ## Rota de leitura para o grupo
 
@@ -27,6 +27,7 @@ Investigamos modelos de espaço de estados estruturados para **identificar siste
 | [[Visao geral]] | [[Identificacao de sistemas]] | [[Protocolo comum]] | [[Como colaborar]] |
 | [[Estado atual]] | [[SSMs e Mamba]] | [[E001 - Referencias lineares]] | [[Decisoes e propostas]] |
 | [[Cronograma]] | [[Previsao e simulacao]] | [[E002 - Mamba-3]] | [[Diario]] |
+|  |  | [[E003 - Duffing]] e [[E004 - Duffing com ruido]] |  |
 |  | [[Leituras]] | [[Infraestrutura]] | [[Relatorio 2]] e [[Apresentacao 2]] |
 
 ## Resultados em uma figura

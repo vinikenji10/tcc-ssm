@@ -1,0 +1,462 @@
+{
+  "E003: Duffing sem ruído": {
+    "Persistência": [
+      {
+        "model": "Persistência",
+        "horizon_steps": 1,
+        "rmse_endpoint_m": 0.03465456550583669,
+        "rmse_trajectory_m": 0.03465456550583669,
+        "nrmse_endpoint": 0.12283358317446419,
+        "nrmse_trajectory": 0.12283358317446419,
+        "normalization_std_m": 0.28212614669569464,
+        "rollouts": 545,
+        "nonfinite_values": 0,
+        "parameters": 0
+      },
+      {
+        "model": "Persistência",
+        "horizon_steps": 10,
+        "rmse_endpoint_m": 0.3193381838289337,
+        "rmse_trajectory_m": 0.20380639912471235,
+        "nrmse_endpoint": 1.1318985764668472,
+        "nrmse_trajectory": 0.7223945795585579,
+        "normalization_std_m": 0.28212614669569464,
+        "rollouts": 545,
+        "nonfinite_values": 0,
+        "parameters": 0
+      },
+      {
+        "model": "Persistência",
+        "horizon_steps": 50,
+        "rmse_endpoint_m": 0.3117628522763904,
+        "rmse_trajectory_m": 0.3797220963635668,
+        "nrmse_endpoint": 1.1050477097844544,
+        "nrmse_trajectory": 1.3459301833982107,
+        "normalization_std_m": 0.28212614669569464,
+        "rollouts": 545,
+        "nonfinite_values": 0,
+        "parameters": 0
+      }
+    ],
+    "ARX(8,8)": [
+      {
+        "model": "ARX(8,8)",
+        "horizon_steps": 1,
+        "rmse_endpoint_m": 1.1111118609446033e-05,
+        "rmse_trajectory_m": 1.1111118609446032e-05,
+        "nrmse_endpoint": 3.93835124449867e-05,
+        "nrmse_trajectory": 3.93835124449867e-05,
+        "normalization_std_m": 0.28212614669569464,
+        "rollouts": 545,
+        "nonfinite_values": 0,
+        "parameters": 17
+      },
+      {
+        "model": "ARX(8,8)",
+        "horizon_steps": 10,
+        "rmse_endpoint_m": 0.019435429673686246,
+        "rmse_trajectory_m": 0.008368696790820255,
+        "nrmse_endpoint": 0.06888914728860485,
+        "nrmse_trajectory": 0.029662960660809836,
+        "normalization_std_m": 0.28212614669569464,
+        "rollouts": 545,
+        "nonfinite_values": 0,
+        "parameters": 17
+      },
+      {
+        "model": "ARX(8,8)",
+        "horizon_steps": 50,
+        "rmse_endpoint_m": 0.12509096634935402,
+        "rmse_trajectory_m": 0.08915243100694337,
+        "nrmse_endpoint": 0.44338664747822526,
+        "nrmse_trajectory": 0.3160020155916441,
+        "normalization_std_m": 0.28212614669569464,
+        "rollouts": 545,
+        "nonfinite_values": 0,
+        "parameters": 17
+      }
+    ],
+    "NARX(4,4) grau 3": [
+      {
+        "model": "NARX(4,4) grau 3",
+        "horizon_steps": 1,
+        "rmse_endpoint_m": 4.2563699019862025e-10,
+        "rmse_trajectory_m": 4.2563699019862036e-10,
+        "nrmse_endpoint": 1.508676154917745e-09,
+        "nrmse_trajectory": 1.5086761549177453e-09,
+        "normalization_std_m": 0.28212614669569464,
+        "rollouts": 545,
+        "nonfinite_values": 0,
+        "parameters": 165
+      },
+      {
+        "model": "NARX(4,4) grau 3",
+        "horizon_steps": 10,
+        "rmse_endpoint_m": 3.265975175496806e-09,
+        "rmse_trajectory_m": 1.998476359415262e-09,
+        "nrmse_endpoint": 1.157629384496409e-08,
+        "nrmse_trajectory": 7.0836268910972214e-09,
+        "normalization_std_m": 0.28212614669569464,
+        "rollouts": 545,
+        "nonfinite_values": 0,
+        "parameters": 165
+      },
+      {
+        "model": "NARX(4,4) grau 3",
+        "horizon_steps": 50,
+        "rmse_endpoint_m": 8.091030045775193e-09,
+        "rmse_trajectory_m": 5.529873740158639e-09,
+        "nrmse_endpoint": 2.867876707117932e-08,
+        "nrmse_trajectory": 1.960071338628263e-08,
+        "normalization_std_m": 0.28212614669569464,
+        "rollouts": 545,
+        "nonfinite_values": 0,
+        "parameters": 165
+      }
+    ],
+    "Mamba-3 (semente 1)": [
+      {
+        "model": "Mamba-3 (semente 1)",
+        "horizon_steps": 1,
+        "rmse_endpoint_m": 0.0007379561958574247,
+        "rmse_trajectory_m": 0.0007379561958574245,
+        "nrmse_endpoint": 0.002615695866903804,
+        "nrmse_trajectory": 0.002615695866903803,
+        "normalization_std_m": 0.28212614669569464,
+        "rollouts": 545,
+        "nonfinite_values": 0,
+        "parameters": 34949
+      },
+      {
+        "model": "Mamba-3 (semente 1)",
+        "horizon_steps": 10,
+        "rmse_endpoint_m": 0.007978601687483345,
+        "rmse_trajectory_m": 0.0053461052474630694,
+        "nrmse_endpoint": 0.028280263211793624,
+        "nrmse_trajectory": 0.018949343441143213,
+        "normalization_std_m": 0.28212614669569464,
+        "rollouts": 545,
+        "nonfinite_values": 0,
+        "parameters": 34949
+      },
+      {
+        "model": "Mamba-3 (semente 1)",
+        "horizon_steps": 50,
+        "rmse_endpoint_m": 0.01770598659255327,
+        "rmse_trajectory_m": 0.012569096774484529,
+        "nrmse_endpoint": 0.06275911254567697,
+        "nrmse_trajectory": 0.044551336066138314,
+        "normalization_std_m": 0.28212614669569464,
+        "rollouts": 545,
+        "nonfinite_values": 0,
+        "parameters": 34949
+      }
+    ],
+    "Mamba-3 (semente 2)": [
+      {
+        "model": "Mamba-3 (semente 2)",
+        "horizon_steps": 1,
+        "rmse_endpoint_m": 0.0011704196509918737,
+        "rmse_trajectory_m": 0.0011704196509918744,
+        "nrmse_endpoint": 0.004148568520500531,
+        "nrmse_trajectory": 0.004148568520500533,
+        "normalization_std_m": 0.28212614669569464,
+        "rollouts": 545,
+        "nonfinite_values": 0,
+        "parameters": 34949
+      },
+      {
+        "model": "Mamba-3 (semente 2)",
+        "horizon_steps": 10,
+        "rmse_endpoint_m": 0.012889242067595438,
+        "rmse_trajectory_m": 0.008198666588970813,
+        "nrmse_endpoint": 0.045686095452535144,
+        "nrmse_trajectory": 0.029060286276174234,
+        "normalization_std_m": 0.28212614669569464,
+        "rollouts": 545,
+        "nonfinite_values": 0,
+        "parameters": 34949
+      },
+      {
+        "model": "Mamba-3 (semente 2)",
+        "horizon_steps": 50,
+        "rmse_endpoint_m": 0.031962304639135,
+        "rmse_trajectory_m": 0.02219288618285938,
+        "nrmse_endpoint": 0.11329082757299345,
+        "nrmse_trajectory": 0.07866298973982354,
+        "normalization_std_m": 0.28212614669569464,
+        "rollouts": 545,
+        "nonfinite_values": 0,
+        "parameters": 34949
+      }
+    ],
+    "Mamba-3 (semente 3)": [
+      {
+        "model": "Mamba-3 (semente 3)",
+        "horizon_steps": 1,
+        "rmse_endpoint_m": 0.0007531209709205731,
+        "rmse_trajectory_m": 0.000753120970920573,
+        "nrmse_endpoint": 0.0026694476202976693,
+        "nrmse_trajectory": 0.002669447620297669,
+        "normalization_std_m": 0.28212614669569464,
+        "rollouts": 545,
+        "nonfinite_values": 0,
+        "parameters": 34949
+      },
+      {
+        "model": "Mamba-3 (semente 3)",
+        "horizon_steps": 10,
+        "rmse_endpoint_m": 0.006991100950789935,
+        "rmse_trajectory_m": 0.00465751167262672,
+        "nrmse_endpoint": 0.02478005329414093,
+        "nrmse_trajectory": 0.016508614062100312,
+        "normalization_std_m": 0.28212614669569464,
+        "rollouts": 545,
+        "nonfinite_values": 0,
+        "parameters": 34949
+      },
+      {
+        "model": "Mamba-3 (semente 3)",
+        "horizon_steps": 50,
+        "rmse_endpoint_m": 0.01520921238545231,
+        "rmse_trajectory_m": 0.011011805815503695,
+        "nrmse_endpoint": 0.05390926209280839,
+        "nrmse_trajectory": 0.03903149688348875,
+        "normalization_std_m": 0.28212614669569464,
+        "rollouts": 545,
+        "nonfinite_values": 0,
+        "parameters": 34949
+      }
+    ]
+  },
+  "E004: Duffing com ruído (erro contra a posição sem ruído)": {
+    "Persistência": [
+      {
+        "model": "Persistência",
+        "horizon_steps": 1,
+        "rmse_endpoint_m": 0.04057720610763635,
+        "rmse_trajectory_m": 0.04057720610763634,
+        "nrmse_endpoint": 0.14382646409374994,
+        "nrmse_trajectory": 0.1438264640937499,
+        "normalization_std_m": 0.28212614669569464,
+        "rollouts": 545,
+        "nonfinite_values": 0,
+        "parameters": 0
+      },
+      {
+        "model": "Persistência",
+        "horizon_steps": 10,
+        "rmse_endpoint_m": 0.31915112830275444,
+        "rmse_trajectory_m": 0.20429212968221466,
+        "nrmse_endpoint": 1.1312355555864004,
+        "nrmse_trajectory": 0.72411625818775,
+        "normalization_std_m": 0.28212614669569464,
+        "rollouts": 545,
+        "nonfinite_values": 0,
+        "parameters": 0
+      },
+      {
+        "model": "Persistência",
+        "horizon_steps": 50,
+        "rmse_endpoint_m": 0.3129871406179625,
+        "rmse_trajectory_m": 0.38032855149848915,
+        "nrmse_endpoint": 1.109387216618228,
+        "nrmse_trajectory": 1.3480797719493793,
+        "normalization_std_m": 0.28212614669569464,
+        "rollouts": 545,
+        "nonfinite_values": 0,
+        "parameters": 0
+      }
+    ],
+    "ARX(8,8)": [
+      {
+        "model": "ARX(8,8)",
+        "horizon_steps": 1,
+        "rmse_endpoint_m": 0.018435554633684747,
+        "rmse_trajectory_m": 0.01843555463368474,
+        "nrmse_endpoint": 0.06534507648300178,
+        "nrmse_trajectory": 0.06534507648300177,
+        "normalization_std_m": 0.28212614669569464,
+        "rollouts": 545,
+        "nonfinite_values": 0,
+        "parameters": 17
+      },
+      {
+        "model": "ARX(8,8)",
+        "horizon_steps": 10,
+        "rmse_endpoint_m": 0.0762924753278742,
+        "rmse_trajectory_m": 0.05144253397496306,
+        "nrmse_endpoint": 0.2704197261452848,
+        "nrmse_trajectory": 0.18233876787907122,
+        "normalization_std_m": 0.28212614669569464,
+        "rollouts": 545,
+        "nonfinite_values": 0,
+        "parameters": 17
+      },
+      {
+        "model": "ARX(8,8)",
+        "horizon_steps": 50,
+        "rmse_endpoint_m": 0.12669447809567683,
+        "rmse_trajectory_m": 0.10208740654410921,
+        "nrmse_endpoint": 0.4490703168761289,
+        "nrmse_trajectory": 0.36185021395490213,
+        "normalization_std_m": 0.28212614669569464,
+        "rollouts": 545,
+        "nonfinite_values": 0,
+        "parameters": 17
+      }
+    ],
+    "NARX(4,4) grau 3": [
+      {
+        "model": "NARX(4,4) grau 3",
+        "horizon_steps": 1,
+        "rmse_endpoint_m": 0.024606292124741795,
+        "rmse_trajectory_m": 0.0246062921247418,
+        "nrmse_endpoint": 0.08721734023214268,
+        "nrmse_trajectory": 0.0872173402321427,
+        "normalization_std_m": 0.28212614669569464,
+        "rollouts": 545,
+        "nonfinite_values": 0,
+        "parameters": 165
+      },
+      {
+        "model": "NARX(4,4) grau 3",
+        "horizon_steps": 10,
+        "rmse_endpoint_m": 0.0980088469689655,
+        "rmse_trajectory_m": 0.06717387688784776,
+        "nrmse_endpoint": 0.347393703550204,
+        "nrmse_trajectory": 0.23809872879418895,
+        "normalization_std_m": 0.28212614669569464,
+        "rollouts": 545,
+        "nonfinite_values": 0,
+        "parameters": 165
+      },
+      {
+        "model": "NARX(4,4) grau 3",
+        "horizon_steps": 50,
+        "rmse_endpoint_m": 0.18339726142843032,
+        "rmse_trajectory_m": 0.14532280568979222,
+        "nrmse_endpoint": 0.6500541108167662,
+        "nrmse_trajectory": 0.5150986797637708,
+        "normalization_std_m": 0.28212614669569464,
+        "rollouts": 545,
+        "nonfinite_values": 0,
+        "parameters": 165
+      }
+    ],
+    "Mamba-3 (semente 1)": [
+      {
+        "model": "Mamba-3 (semente 1)",
+        "horizon_steps": 1,
+        "rmse_endpoint_m": 0.009126994270064743,
+        "rmse_trajectory_m": 0.009126994270064739,
+        "nrmse_endpoint": 0.0323507564859249,
+        "nrmse_trajectory": 0.032350756485924885,
+        "normalization_std_m": 0.28212614669569464,
+        "rollouts": 545,
+        "nonfinite_values": 0,
+        "parameters": 34949
+      },
+      {
+        "model": "Mamba-3 (semente 1)",
+        "horizon_steps": 10,
+        "rmse_endpoint_m": 0.011967927605998551,
+        "rmse_trajectory_m": 0.010537708706141343,
+        "nrmse_endpoint": 0.04242048369556946,
+        "nrmse_trajectory": 0.037351053170933034,
+        "normalization_std_m": 0.28212614669569464,
+        "rollouts": 545,
+        "nonfinite_values": 0,
+        "parameters": 34949
+      },
+      {
+        "model": "Mamba-3 (semente 1)",
+        "horizon_steps": 50,
+        "rmse_endpoint_m": 0.015909650101635364,
+        "rmse_trajectory_m": 0.01373883284376923,
+        "nrmse_endpoint": 0.056391973193451454,
+        "nrmse_trajectory": 0.04869748162189354,
+        "normalization_std_m": 0.28212614669569464,
+        "rollouts": 545,
+        "nonfinite_values": 0,
+        "parameters": 34949
+      }
+    ],
+    "Mamba-3 (semente 2)": [
+      {
+        "model": "Mamba-3 (semente 2)",
+        "horizon_steps": 1,
+        "rmse_endpoint_m": 0.009487263718355211,
+        "rmse_trajectory_m": 0.009487263718355208,
+        "nrmse_endpoint": 0.03362773649118141,
+        "nrmse_trajectory": 0.0336277364911814,
+        "normalization_std_m": 0.28212614669569464,
+        "rollouts": 545,
+        "nonfinite_values": 0,
+        "parameters": 34949
+      },
+      {
+        "model": "Mamba-3 (semente 2)",
+        "horizon_steps": 10,
+        "rmse_endpoint_m": 0.014775618095918751,
+        "rmse_trajectory_m": 0.012700831330191238,
+        "nrmse_endpoint": 0.05237238118115989,
+        "nrmse_trajectory": 0.0450182710072971,
+        "normalization_std_m": 0.28212614669569464,
+        "rollouts": 545,
+        "nonfinite_values": 0,
+        "parameters": 34949
+      },
+      {
+        "model": "Mamba-3 (semente 2)",
+        "horizon_steps": 50,
+        "rmse_endpoint_m": 0.024170921061165706,
+        "rmse_trajectory_m": 0.018684219629588234,
+        "nrmse_endpoint": 0.08567416152050882,
+        "nrmse_trajectory": 0.06622647297466301,
+        "normalization_std_m": 0.28212614669569464,
+        "rollouts": 545,
+        "nonfinite_values": 0,
+        "parameters": 34949
+      }
+    ],
+    "Mamba-3 (semente 3)": [
+      {
+        "model": "Mamba-3 (semente 3)",
+        "horizon_steps": 1,
+        "rmse_endpoint_m": 0.008791718204730133,
+        "rmse_trajectory_m": 0.00879171820473013,
+        "nrmse_endpoint": 0.031162365869665413,
+        "nrmse_trajectory": 0.03116236586966541,
+        "normalization_std_m": 0.28212614669569464,
+        "rollouts": 545,
+        "nonfinite_values": 0,
+        "parameters": 34949
+      },
+      {
+        "model": "Mamba-3 (semente 3)",
+        "horizon_steps": 10,
+        "rmse_endpoint_m": 0.011610578695584519,
+        "rmse_trajectory_m": 0.010651122604962563,
+        "nrmse_endpoint": 0.04115385557690921,
+        "nrmse_trajectory": 0.03775305029225462,
+        "normalization_std_m": 0.28212614669569464,
+        "rollouts": 545,
+        "nonfinite_values": 0,
+        "parameters": 34949
+      },
+      {
+        "model": "Mamba-3 (semente 3)",
+        "horizon_steps": 50,
+        "rmse_endpoint_m": 0.01731945252861798,
+        "rmse_trajectory_m": 0.013799816625420134,
+        "nrmse_endpoint": 0.06138903724970586,
+        "nrmse_trajectory": 0.04891363947314255,
+        "normalization_std_m": 0.28212614669569464,
+        "rollouts": 545,
+        "nonfinite_values": 0,
+        "parameters": 34949
+      }
+    ]
+  }
+}
