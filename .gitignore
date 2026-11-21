@@ -12,3 +12,6 @@ vault/.trash/
 
 CLAUDE.local.md
 relatorio-2/*.zip
+
+# Dados de terceiros (Silverbox): não entram no repositório
+dados-externos/

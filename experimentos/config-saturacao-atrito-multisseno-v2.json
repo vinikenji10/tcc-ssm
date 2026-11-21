@@ -1,0 +1,50 @@
+{
+  "scenario": "E008b",
+  "description": "Massa-mola com saturação da força e atrito de Coulomb suavizado, excitada por multisseno de fase aleatória (descritivo); ruído pela regra da seção 3.2",
+  "pre_registration": "planejamento/pre-registro-a3.md",
+  "seed": 20261123,
+  "plant": {"model": "saturation_friction", "mass": 1.0, "damping": 0.4, "stiffness": 4.0,
+            "saturation_limit": 1.5, "coulomb_friction": 0.3, "friction_velocity_scale": 0.01,
+            "sample_time": 0.05, "rk4_substeps": 20},
+  "initial_state": {"position_limit": 0.2, "velocity_limit": 0.2},
+  "excitation": {"type": "multisine", "rms": 1.1547005383792517, "first_harmonic": 1, "last_harmonic": 204,
+                 "period": 2048},
+  "data": {
+    "train_episodes": 20,
+    "validation_episodes": 5,
+    "test_episodes": 20,
+    "steps": 2048,
+    "measurement_noise_std": 0.011
+  },
+  "evaluation": {"history": 256, "warmup": 256, "origin_stride": 16, "horizons": [1, 10, 50],
+                 "selection_horizon": 50, "divergence_factor": 10, "tie_tolerance_m": 1e-12},
+  "bootstrap": {"resamples": 10000, "confidence": 0.95, "seed": 20261129},
+  "grids": {
+    "initial_state": {"variants": ["medido", "janela"], "window": 256,
+                      "nonlinear_solver": {"method": "levenberg-marquardt", "max_iterations": 20,
+                                           "relative_tolerance": 1e-9}},
+    "arx": {"output_orders": [1, 2, 4, 8, 16], "input_orders": [1, 2, 4, 8, 16], "edge_extension": [24, 32]},
+    "narx_polynomial": {"orders": [1, 2, 3, 4, 6, 8, 10, 12, 16], "degrees": [2, 3, 4], "max_terms": 2000},
+    "frols": {"dictionaries": [{"order": 16, "degree": 2}, {"order": 10, "degree": 3}, {"order": 6, "degree": 4}],
+              "max_terms_selected": 50, "esr_tolerance": 1e-12,
+              "terms_grid": [1, 2, 3, 4, 5, 6, 8, 10, 12, 15, 20, 25, 30, 40, 50]},
+    "narx_simulation_error": {"start": "modelo FROLS escolhido", "horizon": 50, "origin_stride": 16,
+                              "method": "levenberg-marquardt", "max_iterations": 100, "relative_tolerance": 1e-8},
+    "networks": {
+      "families": {
+        "mamba3": {"d_model": 64, "n_layers": 1, "d_state": 64, "expand": 2, "headdim": 64,
+                   "parameters_reference": 34949},
+        "gru": {"input_size": 2, "hidden_size": 106, "num_layers": 1, "output": "Linear(106, 1)",
+                "parameters_expected": 35087}
+      },
+      "learning_rates": [0.001, 0.003, 0.01],
+      "losses": {
+        "one_step": {"window": 512, "window_stride": 128, "loss_skip": 128, "max_epochs": 1000},
+        "multi_step": {"warmup": 256, "horizon": 50, "origin_stride": 64, "max_epochs": 300}
+      },
+      "batch_size": 32, "optimizer": "AdamW", "weight_decay": 0.0, "grad_clip": 1.0, "lr_schedule": "cosine",
+      "eval_every": 10, "patience_evaluations": 10,
+      "selection_seeds": [1, 2], "final_seeds": [1, 2, 3, 4, 5]
+    }
+  }
+}

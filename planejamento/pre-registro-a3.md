@@ -294,4 +294,11 @@ As sementes do teste (5 por rede) e as grades de E005 a E008a não são cortadas
 
 ## Emendas
 
-Nenhuma.
+### Emenda 1 - 21/11/2026 (antes de gerar qualquer dado de cenário e de qualquer ajuste)
+
+Escrita pelo orquestrador, com apoio do assistente. Nenhum dado de cenário existia e nenhum teste final tinha sido lido.
+
+1. **Silverbox, teste de sanidade (corrige a seção 3.3).** A seção 3.3 mandava conferir o ARX contra 6,95 / 14,2 / 6,58 mV na camada A "antes das redes". Esses números são dos testes oficiais, e lê-los antes da seleção contradiz a seção 9, item 4. Passa a valer: antes da seleção, o carregador é conferido só pela estrutura do arquivo (número de amostras, índices da divisão, folgas entre realizações, frequência de amostragem) e por um ARX avaliado na **validação** (realização 7), cujo erro de simulação deve ter a ordem de grandeza do multisseno publicado. A comparação do ARX com os três números publicados acontece na leitura única do teste final e é relatada como verificação do carregador. Motivo: a regra de uso único prevalece.
+2. **Silverbox, local dos dados.** O arquivo baixado e os dados derivados dele ficam em `dados-externos/silverbox/`, fora do Git (a página do benchmark não declara licença). Entram no repositório o script, o SHA-256 do arquivo e os manifestos.
+3. **E008, ruído por cenário (esclarece a seção 3.2).** A regra de 0,07 vezes o desvio da posição do treino é aplicada a cada excitação, com a sua semente: 0,025 m no E008a e 0,011 m no E008b (`planejamento/registro-plantas-v2-2026-11-21.md`, seção 2). Desvio populacional de todas as amostras de posição do treino. Calculado só com o treino, antes de qualquer ajuste.
+4. **E008, hash da planta.** A seleção congelada do E008 inclui `experimentos/plantas_v2.py` entre os arquivos de código (`code_files`); os dados do E008 são gerados por `plantas_v2.py gerar`, que chama o mesmo `generate_from_config`.
