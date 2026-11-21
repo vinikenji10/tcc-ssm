@@ -1,0 +1,22 @@
+Treinando lr3e-3, semente 1...
+  concluido; melhor validação 0.06317097821218479 m na época 30; 104 s
+Selecionada pela validação: lr3e-3
+{
+  "device": "cuda",
+  "threads": 2,
+  "pid": 13704,
+  "torch": "2.14.1+cu132",
+  "gpu": "NVIDIA GeForce RTX 4060",
+  "wall_seconds_run": 105.23982489993796,
+  "train_seconds_recorded": 103.51068070007022,
+  "epochs": 30,
+  "validation_evaluations": 3,
+  "validation_eval_seconds": 8.19256730005145,
+  "train_only_seconds_estimate": 95.31811340001877,
+  "seconds_per_epoch_with_eval": 3.450356023335674,
+  "seconds_per_epoch_train_only": 3.1772704466672925,
+  "best_epoch": 30,
+  "best_validation_rmse_trajectory_m": 0.06317097821218479,
+  "cuda_max_memory_allocated_mib": 630.4052734375,
+  "cuda_max_memory_reserved_mib": 948.0
+}

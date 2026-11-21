@@ -1,0 +1,183 @@
+{
+  "criterion": "média, entre as sementes, do menor RMSE da trajetória de 50 passos na validação",
+  "selected": "lr3e-3",
+  "scores_m": {
+    "lr3e-3": 0.06873583059734924
+  },
+  "runs": {
+    "lr3e-3": [
+      {
+        "seed": 2,
+        "status": "concluido",
+        "best_epoch": 30,
+        "best_validation_rmse_trajectory_m": 0.06873583059734924,
+        "train_seconds": 103.28824509994593,
+        "windows": 260,
+        "updates_per_epoch": 9,
+        "parameters": 34949,
+        "epochs": [
+          {
+            "epoch": 1,
+            "train_loss": 0.41372527264886433
+          },
+          {
+            "epoch": 2,
+            "train_loss": 0.02581889234069321
+          },
+          {
+            "epoch": 3,
+            "train_loss": 0.009440163150429726
+          },
+          {
+            "epoch": 4,
+            "train_loss": 0.004910580425833662
+          },
+          {
+            "epoch": 5,
+            "train_loss": 0.002748496545892623
+          },
+          {
+            "epoch": 6,
+            "train_loss": 0.0017618302178258698
+          },
+          {
+            "epoch": 7,
+            "train_loss": 0.001363071205560118
+          },
+          {
+            "epoch": 8,
+            "train_loss": 0.0009140925055059294
+          },
+          {
+            "epoch": 9,
+            "train_loss": 0.0009132817051269942
+          },
+          {
+            "epoch": 10,
+            "train_loss": 0.0007813824664076997
+          },
+          {
+            "epoch": 11,
+            "train_loss": 0.000674811628414318
+          },
+          {
+            "epoch": 12,
+            "train_loss": 0.0004154252140627553
+          },
+          {
+            "epoch": 13,
+            "train_loss": 0.00038838407878453535
+          },
+          {
+            "epoch": 14,
+            "train_loss": 0.0003324033394973311
+          },
+          {
+            "epoch": 15,
+            "train_loss": 0.0002713995167545767
+          },
+          {
+            "epoch": 16,
+            "train_loss": 0.0002478456250779952
+          },
+          {
+            "epoch": 17,
+            "train_loss": 0.00022897345964641622
+          },
+          {
+            "epoch": 18,
+            "train_loss": 0.00022037930870687382
+          },
+          {
+            "epoch": 19,
+            "train_loss": 0.00020497400126057782
+          },
+          {
+            "epoch": 20,
+            "train_loss": 0.00019403241943412772
+          },
+          {
+            "epoch": 21,
+            "train_loss": 0.00018801122334682278
+          },
+          {
+            "epoch": 22,
+            "train_loss": 0.00018432236295969537
+          },
+          {
+            "epoch": 23,
+            "train_loss": 0.0001757603329477004
+          },
+          {
+            "epoch": 24,
+            "train_loss": 0.00017342577565513138
+          },
+          {
+            "epoch": 25,
+            "train_loss": 0.00017136583887299316
+          },
+          {
+            "epoch": 26,
+            "train_loss": 0.00016775741985636868
+          },
+          {
+            "epoch": 27,
+            "train_loss": 0.00016538597184181627
+          },
+          {
+            "epoch": 28,
+            "train_loss": 0.00016399251924465515
+          },
+          {
+            "epoch": 29,
+            "train_loss": 0.00016346946358680725
+          },
+          {
+            "epoch": 30,
+            "train_loss": 0.00016320240360477733
+          }
+        ],
+        "evaluations": [
+          {
+            "epoch": 10,
+            "validation_rmse_trajectory_m": 0.16201644291677575,
+            "nonfinite_values": 0,
+            "elapsed_s": 35.62083129992243
+          },
+          {
+            "epoch": 20,
+            "validation_rmse_trajectory_m": 0.07291245847379973,
+            "nonfinite_values": 0,
+            "elapsed_s": 69.27248379995581
+          },
+          {
+            "epoch": 30,
+            "validation_rmse_trajectory_m": 0.06873583059734924,
+            "nonfinite_values": 0,
+            "elapsed_s": 103.28739029995631
+          }
+        ],
+        "network": {
+          "d_model": 64,
+          "n_layers": 1,
+          "d_state": 64,
+          "expand": 2,
+          "headdim": 64
+        },
+        "training": {
+          "window": 512,
+          "window_stride": 128,
+          "loss_skip": 128,
+          "batch_size": 32,
+          "learning_rate": 0.003,
+          "lr_schedule": "cosine",
+          "weight_decay": 0.0,
+          "grad_clip": 1.0,
+          "max_epochs": 30,
+          "eval_every": 10,
+          "max_minutes_per_run": 20
+        }
+      }
+    ]
+  }
+}

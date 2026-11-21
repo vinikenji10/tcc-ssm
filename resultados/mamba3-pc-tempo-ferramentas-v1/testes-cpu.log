@@ -1,0 +1,30 @@
+test_dataset_is_reproducible_and_inputs_vary_in_amplitude (test_experimento_duffing.DuffingChecks.test_dataset_is_reproducible_and_inputs_vary_in_amplitude) ... ok
+test_monomials_count_includes_constant (test_experimento_duffing.DuffingChecks.test_monomials_count_includes_constant) ... ok
+test_narx_recovers_polynomial_map (test_experimento_duffing.DuffingChecks.test_narx_recovers_polynomial_map) ... ok
+test_static_equilibrium_solves_cubic (test_experimento_duffing.DuffingChecks.test_static_equilibrium_solves_cubic) ... ok
+test_substeps_converge (test_experimento_duffing.DuffingChecks.test_substeps_converge) ... ok
+test_without_cubic_term_matches_exact_zoh (test_experimento_duffing.DuffingChecks.test_without_cubic_term_matches_exact_zoh) ... ok
+test_arx_identifies_and_simulates_unseen_linear_trajectory (test_experimento_linear.ExperimentChecks.test_arx_identifies_and_simulates_unseen_linear_trajectory) ... ok
+test_future_input_cannot_change_first_prediction (test_experimento_linear.ExperimentChecks.test_future_input_cannot_change_first_prediction) ... ok
+test_future_measured_outputs_are_rejected (test_experimento_linear.ExperimentChecks.test_future_measured_outputs_are_rejected) ... ok
+test_normalization_does_not_use_validation_or_test (test_experimento_linear.ExperimentChecks.test_normalization_does_not_use_validation_or_test) ... ok
+test_reproducibility_and_independent_split_ids (test_experimento_linear.ExperimentChecks.test_reproducibility_and_independent_split_ids) ... ok
+test_rollout_feeds_predictions_back (test_experimento_linear.ExperimentChecks.test_rollout_feeds_predictions_back) ... ok
+test_static_equilibrium_is_force_over_stiffness (test_experimento_linear.ExperimentChecks.test_static_equilibrium_is_force_over_stiffness) ... ok
+test_zoh_matches_independent_rk4_integration (test_experimento_linear.ExperimentChecks.test_zoh_matches_independent_rk4_integration) ... ok
+test_origins_and_targets_match_the_reference_evaluation (test_experimento_mamba3.Mamba3ProtocolChecks.test_origins_and_targets_match_the_reference_evaluation) ... ok
+test_simulation_reads_no_measurement_after_the_origin (test_experimento_mamba3.Mamba3ProtocolChecks.test_simulation_reads_no_measurement_after_the_origin) ... ok
+test_step_continuation_matches_recomputing_the_whole_prefix (test_experimento_mamba3.Mamba3ProtocolChecks.test_step_continuation_matches_recomputing_the_whole_prefix) ... ok
+test_training_window_pairs_u_and_y_at_t_with_target_at_t_plus_1 (test_experimento_mamba3.Mamba3ProtocolChecks.test_training_window_pairs_u_and_y_at_t_with_target_at_t_plus_1) ... ok
+test_forward_shape_and_finite_values (test_mamba3_referencia.Mamba3Checks.test_forward_shape_and_finite_values) ... ok
+test_future_inputs_do_not_change_past_outputs (test_mamba3_referencia.Mamba3Checks.test_future_inputs_do_not_change_past_outputs) ... ok
+test_gradients_are_finite_and_reach_every_parameter (test_mamba3_referencia.Mamba3Checks.test_gradients_are_finite_and_reach_every_parameter) ... ok
+test_parameters_match_official_module (test_mamba3_referencia.Mamba3Checks.test_parameters_match_official_module) ... ok
+test_step_ref_matches_fwd_ref (test_mamba3_referencia.Mamba3Checks.test_step_ref_matches_fwd_ref) ... ok
+test_training_updates_reduce_loss_on_a_linear_filter (test_mamba3_referencia.Mamba3Checks.test_training_updates_reduce_loss_on_a_linear_filter) ... ok
+test_warm_start_with_forward_then_step_sample_by_sample (test_mamba3_referencia.Mamba3Checks.test_warm_start_with_forward_then_step_sample_by_sample) ... ok
+
+----------------------------------------------------------------------
+Ran 25 tests in 10.572s
+
+OK

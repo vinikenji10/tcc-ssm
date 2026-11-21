@@ -1,0 +1,17 @@
+14:09:15 
+14:09:35 
+14:09:57     382       00:07 84.1 python experimentos/comparar_kernels_oficiais.py --out resultados/mamba3-kernels-oficiais-v1;
+14:10:18     382       00:28 91.6 python experimentos/comparar_kernels_oficiais.py --out resultados/mamba3-kernels-oficiais-v1;
+14:10:38     382       00:48 94.3 python experimentos/comparar_kernels_oficiais.py --out resultados/mamba3-kernels-oficiais-v1;
+14:10:58 
+14:11:18 
+14:11:41 
+14:12:03 
+14:12:25 
+14:12:48 
+14:13:10 
+14:13:33 
+14:13:55 
+14:14:17 
+14:14:40 
+14:15:02 

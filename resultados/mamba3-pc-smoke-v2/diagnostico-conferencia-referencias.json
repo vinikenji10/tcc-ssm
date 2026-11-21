@@ -1,0 +1,53 @@
+{
+  "nota": "Diagnóstico do G0: smoke do E002 com a conferência das referências clássicas registrada e tolerância absoluta de 1e-12 m.\n\nSó substitui check_against_reference (comparação de métricas de persistência e ARX com o E001 do Mac);\ntreino, validação e teste da rede seguem o código do repositório sem alteração.\nUso: python smoke_tolerancia.py <raiz do repo> <saída> <dispositivo>\n",
+  "comparacoes": [
+    {
+      "model": "Persistência",
+      "horizon_steps": 1,
+      "pc": 0.04194714270134544,
+      "mac": 0.04194714270134544,
+      "abs_diff": 0.0,
+      "original_check_passes": true
+    },
+    {
+      "model": "Persistência",
+      "horizon_steps": 10,
+      "pc": 0.2534110120888996,
+      "mac": 0.2534110120888996,
+      "abs_diff": 0.0,
+      "original_check_passes": true
+    },
+    {
+      "model": "Persistência",
+      "horizon_steps": 50,
+      "pc": 0.6838718221240804,
+      "mac": 0.6838718221240804,
+      "abs_diff": 0.0,
+      "original_check_passes": true
+    },
+    {
+      "model": "ARX(2,2)",
+      "horizon_steps": 1,
+      "pc": 8.719034125296916e-16,
+      "mac": 8.832433669558605e-16,
+      "abs_diff": 1.1339954426168882e-17,
+      "original_check_passes": false
+    },
+    {
+      "model": "ARX(2,2)",
+      "horizon_steps": 10,
+      "pc": 2.1050734079114696e-14,
+      "mac": 2.1421438995458952e-14,
+      "abs_diff": 3.7070491634425625e-16,
+      "original_check_passes": false
+    },
+    {
+      "model": "ARX(2,2)",
+      "horizon_steps": 50,
+      "pc": 1.0743083173165872e-13,
+      "mac": 1.0962398095766042e-13,
+      "abs_diff": 2.1931492260017034e-15,
+      "original_check_passes": false
+    }
+  ]
+}

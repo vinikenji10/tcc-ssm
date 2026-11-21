@@ -1,0 +1,28 @@
+# Ambiente do PC (Windows 11, RTX 4060, Python 3.13.5), saída de pip freeze em 21/11/2026.
+# torch com CUDA 13.2: --index-url https://download.pytorch.org/whl/cu132 --extra-index-url https://pypi.org/simple
+# tzdata: só no Windows, que não tem a base de fusos usada por zoneinfo. Rodar os scripts com PYTHONUTF8=1.
+# Detalhes em planejamento/registro-ambiente-pc-2026-11-21.md.
+contourpy==1.4.0
+cycler==0.12.1
+einops==0.8.2
+filelock==4.2.1
+fonttools==4.66.1
+fsspec==2026.9.0
+Jinja2==3.1.6
+kiwisolver==1.5.1
+MarkupSafe==3.0.4
+matplotlib==3.11.2
+mpmath==1.3.0
+networkx==3.7
+numpy==2.5.4
+packaging==26.3
+pillow==12.3.0
+pyparsing==3.3.3
+python-dateutil==2.9.0.post0
+scipy==1.18.1
+setuptools==84.0.0
+six==1.17.0
+sympy==1.14.0
+torch==2.14.1+cu132
+typing_extensions==4.16.0
+tzdata==2026.6

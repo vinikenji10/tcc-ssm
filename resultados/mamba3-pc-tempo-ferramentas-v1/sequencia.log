@@ -1,0 +1,91 @@
+== tempo300b
+14:16:32 uso_max=24% mem=1264MiB wsl_python=[]
+rc=0 parede_s=392997e-3
+mem_max_MiB=2334
+wsl_python_vistos=0
+Treinando lr3e-3, semente 1...
+  concluido; melhor validação 0.012995765827560022 m na época 280; 389 s
+Selecionada pela validação: lr3e-3
+{
+  "device": "cuda",
+  "threads": 6,
+  "pid": 23368,
+  "torch": "2.14.1+cu132",
+  "gpu": "NVIDIA GeForce RTX 4060",
+  "wall_seconds_run": 390.06353970000055,
+  "train_seconds_recorded": 388.8991629999364,
+  "epochs": 300,
+  "validation_evaluations": 30,
+  "validation_eval_seconds": 27.34126700030174,
+  "train_only_seconds_estimate": 361.55789599963464,
+  "seconds_per_epoch_with_eval": 1.2963305433331214,
+  "seconds_per_epoch_train_only": 1.2051929866654487,
+  "best_epoch": 280,
+  "best_validation_rmse_trajectory_m": 0.012995765827560022,
+  "cuda_max_memory_allocated_mib": 630.4052734375,
+  "cuda_max_memory_reserved_mib": 948.0
+}
+== verif
+14:23:25 uso_max=4% mem=1264MiB wsl_python=[]
+rc=0 parede_s=16704e-3
+mem_max_MiB=2317
+wsl_python_vistos=0
+# Verificação do Mamba-3 SISO em PyTorch - 2026-11-21
+
+Implementação: `experimentos/mamba3_referencia.py`, a partir de `state-spaces/mamba@e9594ce1c732d97440f0332fdc43170a2294dbfa`.
+Bloco: {'d_model': 64, 'd_state': 64, 'expand': 2, 'headdim': 64}; float32; torch 2.14.1+cu132; Windows-11-10.0.26300-SP0.
+
+| Medida | cpu | cuda |
+|---|---:|---:|
+| Erro relativo máx., step_ref contra fwd_ref | 3.6e-07 | 3.9e-07 |
+| Erro relativo máx., aquecimento 256 + 256 passos | 6.3e-07 | 6.5e-07 |
+| Saídas antes de t=299 idênticas após mudar u a partir de t=300 | sim | sim |
+| Gradientes finitos em todos os parâmetros | sim | sim |
+| Passo de treino, batch 32 × 512 [s, mediana] | 0.438 | 0.101 |
+| Avaliação E001: 545 origens, 256 + 50 passos [s, mediana] | 1.42 | 0.69 |
+
+Rede medida: Linear(2→64), um bloco, Linear(64→1); 34821 parâmetros. Sinais aleatórios, sem os dados do E001.
+Tempos desta implementação de referência; não representam os kernels dos autores nem um benchmark de latência.
+== conc-p1
+14:24:01 uso_max=3% mem=1264MiB wsl_python=[]
+rc=0 parede_s=37957e-3
+mem_max_MiB=2334
+wsl_python_vistos=0
+== conc-p3
+14:24:58 uso_max=0% mem=1264MiB wsl_python=[]
+rc=0 parede_s=65723e-3
+mem_max_MiB=4457
+wsl_python_vistos=0
+== conc-p5
+14:26:23 uso_max=0% mem=1264MiB wsl_python=[]
+rc=0 parede_s=111866e-3
+mem_max_MiB=6584
+wsl_python_vistos=0
+== cpu6
+14:28:34 uso_max=1% mem=1269MiB wsl_python=[]
+rc=0 parede_s=40325e-3
+mem_max_MiB=1351
+wsl_python_vistos=0
+Treinando lr3e-3, semente 1...
+  concluido; melhor validação 0.1422385165973864 m na época 10; 37 s
+Selecionada pela validação: lr3e-3
+{
+  "device": "cpu",
+  "threads": 6,
+  "pid": 1860,
+  "torch": "2.14.1+cu132",
+  "gpu": null,
+  "wall_seconds_run": 37.91602230002172,
+  "train_seconds_recorded": 36.93982779991347,
+  "epochs": 10,
+  "validation_evaluations": 1,
+  "validation_eval_seconds": 1.4876912999898195,
+  "train_only_seconds_estimate": 35.452136499923654,
+  "seconds_per_epoch_with_eval": 3.693982779991347,
+  "seconds_per_epoch_train_only": 3.545213649992365,
+  "best_epoch": 10,
+  "best_validation_rmse_trajectory_m": 0.1422385165973864,
+  "cuda_max_memory_allocated_mib": null,
+  "cuda_max_memory_reserved_mib": null
+}
+FIM

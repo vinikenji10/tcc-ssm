@@ -1,0 +1,15 @@
+{
+  "status": "concluido",
+  "created_at": "2026-11-21T14:03:37.551382-03:00",
+  "scope": "planta linear simulada, persistência e ARX; Mamba-3 e MPC não executados",
+  "python": "3.13.5 (tags/v3.13.5:6cb20a2, Jun 11 2025, 16:15:46) [MSC v.1943 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "numpy": "2.5.4",
+  "scipy": "1.18.1",
+  "matplotlib": "3.11.2",
+  "configuration_sha256": "9bf9775627d66d09faa3750443860030ba994393deecfc81502445f500ee5599",
+  "source_sha256": "cfacc919a0de5b0525b5774c2bae49614e4caf84632aa80d6124c3a61841bfbc",
+  "data_sha256": "37853c724f30d39555d120c5761fb6c2409700580bb1999a52aef86b767d69d6",
+  "selected_arx_fitting_seconds": 0.0030485999304801226,
+  "hardware_regime": "CPU; tempo do ajuste, sem benchmark de inferência"
+}

@@ -1,0 +1,19 @@
+{
+  "device": "cuda",
+  "threads": 2,
+  "pid": 9516,
+  "torch": "2.14.1+cu132",
+  "gpu": "NVIDIA GeForce RTX 4060",
+  "wall_seconds_run": 105.457138900063,
+  "train_seconds_recorded": 103.66825780004729,
+  "epochs": 30,
+  "validation_evaluations": 3,
+  "validation_eval_seconds": 8.15315239992924,
+  "train_only_seconds_estimate": 95.51510540011805,
+  "seconds_per_epoch_with_eval": 3.4556085933349094,
+  "seconds_per_epoch_train_only": 3.1838368466706015,
+  "best_epoch": 30,
+  "best_validation_rmse_trajectory_m": 0.07309313148489145,
+  "cuda_max_memory_allocated_mib": 630.4052734375,
+  "cuda_max_memory_reserved_mib": 948.0
+}

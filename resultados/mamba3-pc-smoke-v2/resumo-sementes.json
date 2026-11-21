@@ -1,0 +1,26 @@
+[
+  {
+    "horizon_steps": 1,
+    "seeds": 1,
+    "mean_rmse_trajectory_m": 0.07807019838094255,
+    "std_rmse_trajectory_m": null,
+    "min_rmse_trajectory_m": 0.07807019838094255,
+    "max_rmse_trajectory_m": 0.07807019838094255
+  },
+  {
+    "horizon_steps": 10,
+    "seeds": 1,
+    "mean_rmse_trajectory_m": 0.2616264454055819,
+    "std_rmse_trajectory_m": null,
+    "min_rmse_trajectory_m": 0.2616264454055819,
+    "max_rmse_trajectory_m": 0.2616264454055819
+  },
+  {
+    "horizon_steps": 50,
+    "seeds": 1,
+    "mean_rmse_trajectory_m": 0.4100191587953394,
+    "std_rmse_trajectory_m": null,
+    "min_rmse_trajectory_m": 0.4100191587953394,
+    "max_rmse_trajectory_m": 0.4100191587953394
+  }
+]

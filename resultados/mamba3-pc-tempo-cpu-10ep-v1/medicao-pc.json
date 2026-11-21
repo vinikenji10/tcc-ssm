@@ -1,0 +1,19 @@
+{
+  "device": "cpu",
+  "threads": 6,
+  "pid": 1860,
+  "torch": "2.14.1+cu132",
+  "gpu": null,
+  "wall_seconds_run": 37.91602230002172,
+  "train_seconds_recorded": 36.93982779991347,
+  "epochs": 10,
+  "validation_evaluations": 1,
+  "validation_eval_seconds": 1.4876912999898195,
+  "train_only_seconds_estimate": 35.452136499923654,
+  "seconds_per_epoch_with_eval": 3.693982779991347,
+  "seconds_per_epoch_train_only": 3.545213649992365,
+  "best_epoch": 10,
+  "best_validation_rmse_trajectory_m": 0.1422385165973864,
+  "cuda_max_memory_allocated_mib": null,
+  "cuda_max_memory_reserved_mib": null
+}

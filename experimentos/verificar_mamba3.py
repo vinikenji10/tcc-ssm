@@ -34,6 +34,8 @@ def relative_max_error(value, reference):
 def synchronize(device):
     if device == "mps":
         torch.mps.synchronize()
+    elif device == "cuda":
+        torch.cuda.synchronize()
 
 
 def timed(function, device, repeats):
@@ -120,7 +122,8 @@ def main():
     if out.exists():
         sys.exit(f"{out} já existe; use uma pasta nova para preservar execuções anteriores.")
 
-    devices = ["cpu"] + (["mps"] if torch.backends.mps.is_available() else [])
+    devices = (["cpu"] + (["mps"] if torch.backends.mps.is_available() else [])
+               + (["cuda"] if torch.cuda.is_available() else []))
     source = Path(__file__).with_name("mamba3_referencia.py")
     report = {
         "created_at": datetime.now(ZoneInfo("America/Sao_Paulo")).isoformat(),

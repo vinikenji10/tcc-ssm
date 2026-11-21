@@ -1,0 +1,65 @@
+{
+  "criterion": "média, entre as sementes, do menor RMSE da trajetória de 50 passos na validação",
+  "selected": "lr1e-3",
+  "scores_m": {
+    "lr1e-3": 0.44641282502140733
+  },
+  "runs": {
+    "lr1e-3": [
+      {
+        "seed": 1,
+        "status": "concluido",
+        "best_epoch": 1,
+        "best_validation_rmse_trajectory_m": 0.44641282502140733,
+        "train_seconds": 5.934819799964316,
+        "windows": 260,
+        "updates_per_epoch": 9,
+        "parameters": 34949,
+        "epochs": [
+          {
+            "epoch": 1,
+            "train_loss": 0.16710987728503016
+          },
+          {
+            "epoch": 2,
+            "train_loss": 0.018398440236018762
+          }
+        ],
+        "evaluations": [
+          {
+            "epoch": 1,
+            "validation_rmse_trajectory_m": 0.44641282502140733,
+            "nonfinite_values": 0,
+            "elapsed_s": 3.4571677999338135
+          },
+          {
+            "epoch": 2,
+            "validation_rmse_trajectory_m": 0.559944885135181,
+            "nonfinite_values": 0,
+            "elapsed_s": 5.934817799949087
+          }
+        ],
+        "network": {
+          "d_model": 64,
+          "n_layers": 1,
+          "d_state": 64,
+          "expand": 2,
+          "headdim": 64
+        },
+        "training": {
+          "window": 512,
+          "window_stride": 128,
+          "loss_skip": 128,
+          "batch_size": 32,
+          "learning_rate": 0.001,
+          "lr_schedule": "cosine",
+          "weight_decay": 0.0,
+          "grad_clip": 1.0,
+          "max_epochs": 2,
+          "eval_every": 1,
+          "max_minutes_per_run": 20
+        }
+      }
+    ]
+  }
+}

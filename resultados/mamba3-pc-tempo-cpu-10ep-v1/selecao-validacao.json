@@ -1,0 +1,91 @@
+{
+  "criterion": "média, entre as sementes, do menor RMSE da trajetória de 50 passos na validação",
+  "selected": "lr3e-3",
+  "scores_m": {
+    "lr3e-3": 0.1422385165973864
+  },
+  "runs": {
+    "lr3e-3": [
+      {
+        "seed": 1,
+        "status": "concluido",
+        "best_epoch": 10,
+        "best_validation_rmse_trajectory_m": 0.1422385165973864,
+        "train_seconds": 36.93982779991347,
+        "windows": 260,
+        "updates_per_epoch": 9,
+        "parameters": 34949,
+        "epochs": [
+          {
+            "epoch": 1,
+            "train_loss": 0.29279926005336976
+          },
+          {
+            "epoch": 2,
+            "train_loss": 0.028621175636847813
+          },
+          {
+            "epoch": 3,
+            "train_loss": 0.010757914692577388
+          },
+          {
+            "epoch": 4,
+            "train_loss": 0.005784167752911647
+          },
+          {
+            "epoch": 5,
+            "train_loss": 0.0032886380924739772
+          },
+          {
+            "epoch": 6,
+            "train_loss": 0.001846821719987525
+          },
+          {
+            "epoch": 7,
+            "train_loss": 0.00124566112127569
+          },
+          {
+            "epoch": 8,
+            "train_loss": 0.0010184774421051973
+          },
+          {
+            "epoch": 9,
+            "train_loss": 0.0008942093764845696
+          },
+          {
+            "epoch": 10,
+            "train_loss": 0.0008559014855159654
+          }
+        ],
+        "evaluations": [
+          {
+            "epoch": 10,
+            "validation_rmse_trajectory_m": 0.1422385165973864,
+            "nonfinite_values": 0,
+            "elapsed_s": 36.93850899999961
+          }
+        ],
+        "network": {
+          "d_model": 64,
+          "n_layers": 1,
+          "d_state": 64,
+          "expand": 2,
+          "headdim": 64
+        },
+        "training": {
+          "window": 512,
+          "window_stride": 128,
+          "loss_skip": 128,
+          "batch_size": 32,
+          "learning_rate": 0.003,
+          "lr_schedule": "cosine",
+          "weight_decay": 0.0,
+          "grad_clip": 1.0,
+          "max_epochs": 10,
+          "eval_every": 10,
+          "max_minutes_per_run": 20
+        }
+      }
+    ]
+  }
+}

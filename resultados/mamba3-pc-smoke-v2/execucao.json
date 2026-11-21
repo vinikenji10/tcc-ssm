@@ -1,0 +1,26 @@
+{
+  "status": "concluido",
+  "smoke": true,
+  "created_at": "2026-11-21T14:07:19.978154-03:00",
+  "scope": "Mamba-3 SISO em PyTorch (funções de referência dos autores), planta linear do E001; MPC não executado",
+  "upstream": "state-spaces/mamba@e9594ce1c732d97440f0332fdc43170a2294dbfa",
+  "device": "cuda",
+  "precision": "float32",
+  "python": "3.13.5 (tags/v3.13.5:6cb20a2, Jun 11 2025, 16:15:46) [MSC v.1943 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "torch": "2.14.1+cu132",
+  "numpy": "2.5.4",
+  "configuration_sha256": "e32d45dba8f48e632c1bd829a47d524180121f488437394659786fdc0d3520ba",
+  "source_sha256": {
+    "experimento_mamba3.py": "eb638ca8aa006f4439416a4ff5805ad58288eb3d219e1ae6bfbce23c6f2b59d4",
+    "mamba3_referencia.py": "d0ecc6377b7f523c987452059cacdedf7c8a87421bd982f2a910bc6f2093ad62",
+    "experimento_linear.py": "cfacc919a0de5b0525b5774c2bae49614e4caf84632aa80d6124c3a61841bfbc"
+  },
+  "data_sha256": "201123de00e626937fb0e719a694592acd933f7bf3f2909f7c9bfa7aa04faebe",
+  "total_seconds": 9.396384799969383,
+  "selected": "lr1e-3",
+  "selected_train_seconds": [
+    3.472506199963391
+  ],
+  "hardware_regime": "cuda; implementação de referência, sem benchmark de inferência"
+}
